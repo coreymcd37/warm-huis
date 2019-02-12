@@ -1,0 +1,88 @@
+{% extends '::base_public.html.twig' %}
+
+{% block base_public_content %}
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-8">
+                {{ content.value|raw }}
+            </div>
+            <div class="col-md-4 text-center">
+                <img src="{{ asset('images/kerktoren zonder ruitjes.gif') }}" class="max-width" />
+                <br />
+                {% if popup %}
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#popup_start">
+                        Aan de slag!
+                    </button>
+                {% elseif app.request.session and not app.request.session.has('cookie-consent') and not app.request.session.get('cookie-consent') %}
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#cookie">
+                        Aan de slag!
+                    </button>
+                {% else %}
+                    <a href="{{ path('my_house') }}" class="btn btn-primary" style="padding: 10px">Aan de slag!</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="layout-spacer"></div>
+        <div class="row homeimages">
+            <div class="col-xs-12 col-sm-3">
+                <img src="{{ asset('images/logo/flag_yellow_high.jpg') }}" style="margin-top:10px"/>
+            </div>
+
+            <div class="col-xs-12 col col-sm-offset-1 col-sm-2">
+                <img src="{{ asset('images/logo/interreg_Vlaanderen-Nederland_PANTONE_transparant.png') }}" style="margin-top:10px" />
+            </div>
+
+            <div class="col-xs-12 col-sm-offset-1 col-sm-1">
+                <img src="{{ asset('images/logo/See2Do! - transparante achtergrond.png') }}" style="margin-top:10px" />
+            </div>
+        </div>
+        <div class="text-center">
+        </div>
+
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="popup_start">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>{{ popup.value | raw }}</p>
+                </div>
+                <div class="modal-footer">
+                    {% if app.request.session and not app.request.session.has('cookie-consent') and not app.request.session.get('cookie-consent') %}
+                        <button type="button" class="btn btn-primary " data-dismiss="modal" data-toggle="modal" data-target="#cookie" style="padding: 10px 40px;">
+                            OK
+                        </button>
+                    {% else %}
+                        <a href="{{ path('my_house') }}" class="btn btn-primary" style="padding: 10px 40px;">OK</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="cookie">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h1>Wij vinden uw privacy belangrijk.</h1>
+                    <p>Deze website gebruikt cookies. Sommige cookies zijn noodzakelijk om deze toepassing optimaal te
+                        doen werken. Deze kan je niet weigeren als je de site wil bezoeken. Andere cookies gebruiken we
+                        voor analysedoeleinden. Deze kan je weigeren indien je dit wenst. Bekijk <a href="{{ path('app_privacy') }}">hier</a> ons
+                        cookiebeleid.</p>
+                    <div class="row" style="margin-top:40px">
+                        <div class="col-sm-8">
+                            <a href="{{ path('my_house') }}?cookie-consent=1" class="btn btn-primary btn-sm col-sm-5" style="margin-top: 10px;white-space: normal;">Njammie, ik accepteer cookies!</a>
+                            <div class="col-sm-1"></div>
+                            <a href="{{ path('my_house') }}?cookie-consent=0" class="btn btn-primary btn-sm col-sm-5" style="margin-top: 10px;white-space: normal;">Nee dank u, geen cookies voor mij!</a>
+                        </div>
+                        <div class="col-sm-4">
+                            <img src="{{ asset('images/cookie open clipart.png') }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

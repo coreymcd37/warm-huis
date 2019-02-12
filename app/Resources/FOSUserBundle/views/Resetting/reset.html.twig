@@ -1,0 +1,30 @@
+{% extends '::base_public.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block base_public_content %}
+    <div class="container">
+        <div class="layout-spacer"></div>
+        {% if error %}
+            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>Stel je wachtwoord in</h4>
+            </div>
+            {{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'panel-body' } }) }}
+
+            <div class="form-group">
+                <label class="control-label" for="fos_user_resetting_form_plainPassword_first">Gebruikersnaam</label>
+                <input type="text" class="form-control" value="{{ userEmail }}" readonly>
+            </div>
+
+            {{ form_widget(form) }}
+            <div>
+                <input type="submit" class="btn btn-primary" value="{{ 'resetting.reset.submit'|trans }}"/>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock base_public_content %}

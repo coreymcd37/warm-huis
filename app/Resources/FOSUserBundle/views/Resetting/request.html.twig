@@ -1,0 +1,28 @@
+{% extends '::base_public.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block base_public_content %}
+<div class="container">
+    <div class="layout-spacer"></div>
+    {% if error %}
+        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4>Wachtwoord vergeten?</h4>
+        </div>
+        <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="panel-body">
+            <div class="form-group">
+                <label for="username">{{ 'resetting.request.username'|trans }}</label>
+                <input type="text" id="username" name="username" class="form-control" required="required" />
+            </div>
+            <div>
+                <input type="submit" class="btn btn-primary" value="{{ 'resetting.request.submit'|trans }}" />
+            </div>
+        </form>
+
+    </div>
+</div>
+{% endblock base_public_content %}

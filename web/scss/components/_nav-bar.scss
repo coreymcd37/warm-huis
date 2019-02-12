@@ -1,0 +1,26 @@
+// ====================================================================================================== //
+// NAVBAR //
+// ====================================================================================================== //
+.navbar.navbar-default {
+  background-color: #2c3e48;
+
+  .navbar-brand, .nav a {
+    color: #FFF;
+  }
+
+  a:hover,
+  .nav a:hover {
+    color: #EEE;
+  }
+
+  .open a:hover {
+    color: #000;
+  }
+
+  .nav {
+    .open a.active:hover,
+    .dropdown-menu a {
+      color: #000;
+    }
+  }
+}

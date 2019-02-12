@@ -1,0 +1,133 @@
+admin:
+    path:     /admin
+    defaults: { _controller: one.check_je_huis.controller.config_controller:indexAction }
+
+admin_matrix:
+    path:     /admin/config
+    defaults: { _controller: one.check_je_huis.controller.config_controller:indexAction }
+
+admin_matrix_category_percent_update:
+    path:     /admin/config-category/percent
+    defaults: { _controller: one.check_je_huis.controller.config_controller:updateCategoryPercentAction }
+
+admin_matrix_transformation_update:
+    path:     /admin/config-transformation/{configFrom}/{configTo}/{inverse}
+    defaults: { _controller: one.check_je_huis.controller.config_controller:updateConfigTransformationAction, inverse: false }
+
+admin_config_labels:
+    path:     /admin/config-labels
+    defaults: { _controller: one.check_je_huis.controller.config_controller:labelsAction }
+
+admin_parameters:
+    path:     /admin/parameters
+    defaults: { _controller: one.check_je_huis.controller.parameter_controller:indexAction }
+
+admin_parameters_update:
+    path:     /admin/parameter/update
+    defaults: { _controller: one.check_je_huis.controller.parameter_controller:updateParametersAction }
+
+admin_renewables:
+    path:     /admin/renewables
+    defaults: { _controller: one.check_je_huis.controller.renewable_controller:indexAction }
+
+admin_renewables_update:
+    path:     /admin/renewables/update
+    defaults: { _controller: one.check_je_huis.controller.renewable_controller:updateRenewablesAction }
+
+admin_buildcosts:
+    path:     /admin/buildcosts
+    defaults: { _controller: one.check_je_huis.controller.build_cost_controller:indexAction }
+
+admin_buildcosts_update:
+    path:     /admin/buildcosts/update
+    defaults: { _controller: one.check_je_huis.controller.build_cost_controller:updateBuildCostsAction }
+
+admin_energy:
+    path:     /admin/verbruik
+    defaults: { _controller: one.check_je_huis.controller.default_energy_controller:indexAction }
+
+admin_energy_update:
+    path:     /admin/energy/{id}
+    defaults: { _controller: one.check_je_huis.controller.default_energy_controller:updateDefaultEnergyAction }
+
+admin_surfaces:
+    path:     /admin/afmetingen
+    defaults: { _controller: one.check_je_huis.controller.defaults_controller:indexAction }
+
+admin_surfaces_update:
+    path:     /admin/afmetingen/{id}
+    defaults: { _controller: one.check_je_huis.controller.defaults_controller:updateDefaultsAction }
+
+admin_surface_roof_update:
+    path:     /admin/afmeting-dak/{id}
+    defaults: { _controller: one.check_je_huis.controller.defaults_controller:updateDefaultRoofAction }
+
+admin_subsidies:
+    path:     /admin/subsidies
+    defaults: { _controller: one.check_je_huis.controller.subsidy_controller:indexAction }
+
+admin_subsidies_update:
+    path:     /admin/subsidies/update
+    defaults: { _controller: one.check_je_huis.controller.subsidy_controller:updateAction }
+
+admin_content:
+    path:     /admin/content/{type}
+    defaults: { _controller: one.check_je_huis.controller.content_controller:indexAction }
+
+admin_content_edit:
+    path:     /admin/content/edit/{content}
+    defaults: { _controller: one.check_je_huis.controller.content_controller:editAction }
+
+admin_content_view:
+    path:     /admin/content/view/{content}
+    defaults: { _controller: one.check_je_huis.controller.content_controller:viewAction }
+
+admin_houses:
+    path:     /admin/houses
+    defaults: { _controller: one.check_je_huis.controller.house_controller:adminListAction }
+
+admin_houses_download:
+    path:     /admin/houses/download
+    defaults: { _controller: one.check_je_huis.controller.house_controller:adminListExportAction }
+
+admin_user_list:
+    path: /admin/user/list
+    defaults: { _controller: one.check_je_huis.controller.admin.user_controller:listAction }
+
+admin_user_add:
+    path: /admin/user/add
+    defaults: { _controller: one.check_je_huis.controller.admin.user_controller:addAction }
+
+admin_user_edit:
+    path: /admin/user/{id}/edit
+    defaults: { _controller: one.check_je_huis.controller.admin.user_controller:editAction }
+
+admin_user_delete:
+    path: /admin/user/{user}/delete
+    methods:  [GET, DELETE]
+    defaults: { _controller: one.check_je_huis.controller.admin.user_controller:deleteAction }
+
+admin_city_list:
+    path: /admin/city/list
+    defaults: { _controller: one.check_je_huis.controller.admin.city_controller:listAction }
+
+admin_city_duplicate:
+    path: /admin/city/{city}/duplicate
+    defaults: { _controller: one.check_je_huis.controller.admin.city_controller:duplicateAction }
+
+admin_city_edit:
+    path: /admin/city/{city}/edit
+    defaults: { _controller: one.check_je_huis.controller.admin.city_controller:editAction }
+
+admin_city_delete:
+    path: /admin/city/{city}/delete
+    methods:  [GET, DELETE]
+    defaults: { _controller: one.check_je_huis.controller.admin.city_controller:deleteAction }
+
+admin_audit_log_list:
+    path: /admin/audit_log/list
+    defaults: { _controller: one.check_je_huis.controller.admin.audit_log_controller:listAction }
+
+admin_audit_log_view:
+    path: /admin/audit_log/view/{id}
+    defaults: { _controller: one.check_je_huis.controller.admin.audit_log_controller:viewAction }

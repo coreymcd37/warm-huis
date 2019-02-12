@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="One\CheckJeHuis\Entity\Config" table="config_choices" repository-class="One\CheckJeHuis\Repository\ConfigRepository">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="ordering" type="integer" column="ordering" precision="0" scale="0" nullable="false"/>
+    <field name="label" type="string" column="label" precision="0" scale="0" nullable="false"/>
+    <field name="default" type="boolean" column="default" precision="0" scale="0" nullable="false"/>
+    <field name="defaultUpToYear" type="string" column="defaultUpToYear" precision="0" scale="0" nullable="false"/>
+    <field name="possibleCurrent" type="boolean" column="possibleCurrent" precision="0" scale="0" nullable="false"/>
+    <field name="possibleUpgrade" type="boolean" column="possibleUpgrade" precision="0" scale="0" nullable="false"/>
+    <one-to-many field="transformationEnds" target-entity="One\CheckJeHuis\Entity\ConfigTransformation" mapped-by="toConfig"/>
+    <one-to-many field="transformations" target-entity="One\CheckJeHuis\Entity\ConfigTransformation" mapped-by="fromConfig"/>
+    <many-to-one field="category" target-entity="One\CheckJeHuis\Entity\ConfigCategory" inversed-by="configs">
+      <join-columns>
+        <join-column name="category_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="cost" target-entity="One\CheckJeHuis\Entity\BuildCost" inversed-by="relatedConfigs">
+      <join-columns>
+        <join-column name="relatedCost_id" referenced-column-name="id" nullable="1"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-many field="subsidies" target-entity="One\CheckJeHuis\Entity\Subsidy" inversed-by="configs">
+      <join-table name="config_subsidies">
+        <join-columns>
+          <join-column name="config_id" referenced-column-name="id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="subsidy_id" referenced-column-name="id" nullable="1"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+  </entity>
+</doctrine-mapping>

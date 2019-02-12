@@ -1,0 +1,195 @@
+app_index:
+    path:     /
+    defaults: { _controller: one.check_je_huis.controller.page_controller:indexAction }
+
+app_start:
+    path:     /start
+    defaults: { _controller: one.check_je_huis.controller.page_controller:startAction }
+
+app_info:
+    path:     /meer-info
+    defaults: { _controller: one.check_je_huis.controller.page_controller:moreInfoAction }
+
+app_plan:
+    path:     /plan/{download}
+    defaults: { _controller: one.check_je_huis.controller.page_controller:planAction, download: false }
+
+app_privacy:
+    path:     /privacy
+    defaults: { _controller: one.check_je_huis.controller.page_controller:privacyAction }
+
+#
+# HOUSE CONFIG BASICS
+#
+
+my_house:
+    path: /mijn-huis
+    defaults: { _controller: one.check_je_huis.controller.house_controller:buildingTypeAction }
+
+house_building_type:
+    path: /mijn-huis/type
+    defaults: { _controller: one.check_je_huis.controller.house_controller:buildingTypeAction }
+
+house_year:
+    path: /mijn-huis/jaar
+    defaults: { _controller: one.check_je_huis.controller.house_controller:yearAction }
+
+house_roof:
+    path: /mijn-huis/dak-type
+    defaults: { _controller: one.check_je_huis.controller.house_controller:roofTypeAction }
+
+house_surface:
+    path: /mijn-huis/oppervlakte
+    defaults: { _controller: one.check_je_huis.controller.house_controller:surfaceAction }
+
+house_ownership:
+    path: /mijn-huis/eigenaar
+    defaults: { _controller: one.check_je_huis.controller.house_controller:ownershipAction }
+
+house_occupants:
+    path: /mijn-huis/bewoners
+    defaults: { _controller: one.check_je_huis.controller.house_controller:occupantsAction }
+
+house_energy:
+    path: /mijn-huis/energie
+    defaults: { _controller: one.check_je_huis.controller.house_controller:energyAction }
+
+#
+# HOUSE CONFIG SPECIFICS
+#
+
+house_config:
+    path: /zo-woon-ik
+    defaults: { _controller: one.check_je_huis.controller.house_controller:roofConfigAction }
+
+house_config_roof:
+    path: /zo-woon-ik/dakisolatie
+    defaults: { _controller: one.check_je_huis.controller.house_controller:roofConfigAction }
+
+house_config_floor:
+    path: /zo-woon-ik/vloerisolatie
+    defaults: { _controller: one.check_je_huis.controller.house_controller:floorConfigAction }
+
+house_config_facade:
+    path: /zo-woon-ik/gevelisolatie
+    defaults: { _controller: one.check_je_huis.controller.house_controller:facadeConfigAction }
+
+house_config_window:
+    path: /zo-woon-ik/ramen
+    defaults: { _controller: one.check_je_huis.controller.house_controller:windowConfigAction }
+
+house_config_ventilation:
+    path: /zo-woon-ik/ventilatie
+    defaults: { _controller: one.check_je_huis.controller.house_controller:ventilationConfigAction }
+
+house_config_heating:
+    path: /zo-woon-ik/verwarming
+    defaults: { _controller: one.check_je_huis.controller.house_controller:heatingConfigAction }
+
+house_config_renewable:
+    path: /zo-woon-ik/hernieuwebare-energie
+    defaults: { _controller: one.check_je_huis.controller.house_controller:renewableConfigAction }
+
+#
+# CALCULATOR
+#
+
+house_energy_summary:
+    path: /zo-woon-ik/energie
+    defaults: { _controller: one.check_je_huis.controller.house_controller:energySummaryAction }
+
+house_calculator:
+    path:     /zo-wil-ik-wonen
+    defaults: { _controller: one.check_je_huis.controller.house_controller:calculatorAction }
+
+house_calc_detail:
+    path:     /berekening/detail
+    defaults: { _controller: one.check_je_huis.controller.house_controller:calculationDetailAction }
+
+house_calc_pdf_template:
+    path:     /zo-wil-ik-wonen/pdf/template/{token}
+    defaults: { _controller: one.check_je_huis.controller.house_controller:calculationPdfTemplateAction }
+
+house_calc_pdf:
+    path:     /zo-wil-ik-wonen/pdf
+    defaults: { _controller: one.check_je_huis.controller.house_controller:calculationPdfAction }
+
+#
+# AJAX ROUTES
+#
+
+house_config_update_category:
+    path:     /configuratie/update
+    defaults: { _controller: one.check_je_huis.controller.house_controller:updateSingleConfigAction }
+
+house_toggle_windroof:
+    path:     /dak/onderdak/{current}
+    defaults: { _controller: one.check_je_huis.controller.house_controller:toggleWindroofAction, current: false }
+
+house_update_surface_roof:
+    path:     /oppervlakte/dak
+    defaults: { _controller: one.check_je_huis.controller.house_controller:updateSurfaceRoofAction }
+
+house_update_surface_roof_extra:
+    path:     /oppervlakte/dak-plat
+    defaults: { _controller: one.check_je_huis.controller.house_controller:updateSurfaceRoofExtraAction }
+
+house_update_surface_floor:
+    path:     /oppervlakte/grond
+    defaults: { _controller: one.check_je_huis.controller.house_controller:updateSurfaceFloorAction }
+
+house_update_surface_facade:
+    path:     /oppervlakte/gevel
+    defaults: { _controller: one.check_je_huis.controller.house_controller:updateSurfaceFacadeAction }
+
+house_update_surface_window:
+    path:     /oppervlakte/ramen
+    defaults: { _controller: one.check_je_huis.controller.house_controller:updateSurfaceWindowAction }
+
+house_update_solar_wp:
+    path:     /dak/pv-wp
+    defaults: { _controller: one.check_je_huis.controller.house_controller:updateSolarWPAction }
+
+house_toggle_renewable:
+    path:     /hernieuwbaar
+    defaults: { _controller: one.check_je_huis.controller.house_controller:toggleRenewableConfigAction }
+
+house_toggle_renewable_upgrade:
+    path:     /hernieuwbaar/gewenst
+    defaults: { _controller: one.check_je_huis.controller.house_controller:toggleRenewableAction }
+
+house_data:
+    path:     /huis-data/{token}
+    defaults: { _controller: one.check_je_huis.controller.house_controller:exportAction }
+
+
+
+#
+# OTHER PUBLIC ROUTES
+#
+
+house_poll:
+    path:     /poll
+    defaults: { _controller: one.check_je_huis.controller.house_controller:pollAction }
+
+house_load_token:
+    path:     /laden/{token}
+    defaults: { _controller: one.check_je_huis.controller.house_controller:loadHouseFromTokenAction }
+
+house_mail_token:
+    path:     /mail-url
+    defaults: { _controller: one.check_je_huis.controller.house_controller:mailTokenUrlAction }
+
+house_mail_pdf:
+    path:     /mail-pdf
+    defaults: { _controller: one.check_je_huis.controller.house_controller:mailPdfAction }
+house_download_pdf:
+    path:     /download-pdf
+    defaults: { _controller: one.check_je_huis.controller.house_controller:downloadPdfAction }
+house_reset:
+    path:     /reset
+    defaults: { _controller: one.check_je_huis.controller.house_controller:resetAction }
+
+house_flow_next:
+    path: /next/{route}
+    defaults: { _controller: one.check_je_huis.controller.flow_controller:nextAction }

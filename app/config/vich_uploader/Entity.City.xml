@@ -1,0 +1,5 @@
+<vich_uploader class="One\CheckJeHuis\Entity\City">
+    <field mapping="header_logo" name="headerLogoImageFile" filename_property="headerLogoImage" />
+    <field mapping="footer_logo" name="footerLogoImageFile" filename_property="footerLogoImage" />
+    <field mapping="thermographic_photo_image" name="thermographicPhotoImageFile" filename_property="thermographicPhotoImage" />
+</vich_uploader>

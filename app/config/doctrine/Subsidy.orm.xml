@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="One\CheckJeHuis\Entity\Subsidy" table="subsidies" repository-class="One\CheckJeHuis\Repository\SubsidyRepository">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="slug" type="string" column="slug" precision="0" scale="0" nullable="false"/>
+    <field name="label" type="string" column="label" precision="0" scale="0" nullable="false"/>
+    <field name="value" type="float" column="value" precision="0" scale="0" nullable="false"/>
+    <field name="multiplier" type="string" column="multiplier" precision="0" scale="0" nullable="false"/>
+    <field name="max" type="integer" column="max" precision="0" scale="0" nullable="false"/>
+    <many-to-one field="city" target-entity="One\CheckJeHuis\Entity\City">
+      <join-columns>
+        <join-column name="city_id" referenced-column-name="id" nullable="true"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="subsidyCategory" target-entity="One\CheckJeHuis\Entity\SubsidyCategory" inversed-by="subsidies">
+      <join-columns>
+        <join-column name="subsidyCategory_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-many field="configs" target-entity="One\CheckJeHuis\Entity\Config" mapped-by="subsidies"/>
+  </entity>
+</doctrine-mapping>

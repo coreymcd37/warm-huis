@@ -1,0 +1,81 @@
+{% extends '::base.html.twig' %}
+
+{% block base_head %}
+    {{ parent() }}
+
+    <style>
+        {% if backgroundColorHeader(app.request) %}
+        .page-heading {
+            background: {{ '#' ~ backgroundColorHeader(app.request) }};
+        }
+        .page-footer {
+            background: {{ '#' ~ backgroundColorHeader(app.request) }};
+        }
+        {% endif %}
+        {% if textColorHeader(app.request) %}
+        .page-heading a {
+            color: {{ '#' ~ textColorHeader(app.request) }};
+        }
+        .page-menu {
+            color: {{ '#' ~ textColorHeader(app.request) }};
+        }
+        {% endif %}
+        {% if textColor(app.request) %}
+        body {
+            background-color: {{ '#' ~ backgroundColor(app.request) }};
+            color: {{ '#' ~ textColor(app.request) }};
+        }
+        {% endif %}
+        {% if buttonColor(app.request) %}
+        .btn.btn-primary {
+            background-color: {{ '#' ~ buttonColor(app.request) }};
+            border-color: {{ '#' ~ buttonColor(app.request) }};
+        }
+        {% endif %}
+    </style>
+
+    {% if app.request.session and app.request.session.get('cookie-consent') == true %}
+        {{ javascriptBottom(app.request) | raw }}
+    {% endif %}
+{% endblock %}
+
+{% block base_content %}
+    <div class="page-wrapper">
+
+        {% block base_public_content %}{% endblock %}
+
+        <div class="page-footer-push"></div>
+
+    </div>
+
+    {% if not embed(app.request) %}
+    <div class="page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-3 col-xs-3">
+                    {% if footerLogoImage(app.request) %}
+                        <a href="{{ footerLogoLink(app.request) }}"><img src="{{ vich_uploader_asset(city(app.request), 'footerLogoImageFile') }}" style="max-height: 95px" class="max-width" /></a>
+                    {% endif %}
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6 text-center">
+                    <a href="{{ path('app_privacy') }}">privacy</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="modal fade" id="app-modal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    {% block app_modal_content %}{% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="one.check_je_huis.gks_url_map_heat">http://warmtefoto.gent.be/?bb_token=[[BB_TOKEN]]&amp;bb_address=[[BB_ADDRESS]]&amp;returnurl=[[BB_RETURN_URL]]</parameter>
+        <parameter key="one.check_je_huis.gks_url_map_solar">http://zonnekaart.gent.be/?bb_token=[[BB_TOKEN]]&amp;bb_address=[[BB_ADDRESS]]&amp;returnurl=[[BB_RETURN_URL]]</parameter>
+        <parameter key="pdo_session.db_options" type="collection">
+            <parameter key="db_table">session</parameter>
+            <parameter key="db_id_col">session_id</parameter>
+            <parameter key="db_data_col">session_value</parameter>
+            <parameter key="db_time_col">session_time</parameter>
+            <parameter key="db_username">%database_user%</parameter>
+            <parameter key="db_password">%database_password%</parameter>
+        </parameter>
+    </parameters>
+    <services>
+        <service id="one.check_je_huis.service.house" class="One\CheckJeHuis\Service\HouseService">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <argument type="service" id="knp_snappy.pdf"/>
+            <argument type="service" id="router"/>
+            <argument type="service" id="one.check_je_huis.repository.config_repository"/>
+            <call method="setUrlHeatMap">
+                <argument>%one.check_je_huis.gks_url_map_heat%</argument>
+            </call>
+            <call method="setUrlSolarMap">
+                <argument>%one.check_je_huis.gks_url_map_solar%</argument>
+            </call>
+        </service>
+
+        <service id="one.check_je_huis.service.buildcost" class="One\CheckJeHuis\Service\BuildCostService">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+
+        <service id="one.check_je_huis.service.parameter" class="One\CheckJeHuis\Service\ParameterService">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+
+        <service id="one.check_je_huis.service.defaults" class="One\CheckJeHuis\Service\DefaultsService">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+
+        <service id="one.check_je_huis.service.content" class="One\CheckJeHuis\Service\ContentService">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+
+        <service id="one.check_je_huis.service.subsidy" class="One\CheckJeHuis\Service\SubsidyService">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+
+        <service id="one.check_je_huis.calculator.factory" class="One\CheckJeHuis\Calculator\CalculatorFactory">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="one.check_je_huis.service.mailer" class="One\CheckJeHuis\Service\MailService">
+            <argument type="service" id="mailer"/>
+            <argument type="service" id="templating"/>
+            <argument type="service" id="file_locator"/>
+            <argument type="service" id="one.check_je_huis.repository.content_repository"/>
+            <argument type="service" id="one.check_je_huis.service.house"/>
+            <argument>%fos_user_from_email_address%</argument>
+        </service>
+
+        <service id="session.handler.pdo" class="Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler">
+            <argument key="dsn">mysql:host=%database_host%;dbname=%database_name%</argument>
+            <argument>%pdo_session.db_options%</argument>
+        </service>
+        
+        <service id="one.check_je_huis.security.city_voter" class="One\CheckJeHuis\Security\CityVoter" public="false">
+            <tag name="security.voter" />
+        </service>
+
+        <service id="one.check_je_huis.service.flow_service" class="One\CheckJeHuis\Service\FlowService">
+            <argument type="service" id="request_stack"/>
+            <argument type="service" id="one.check_je_huis.service.house"/>
+        </service>
+
+        <service id="one.check_je_huis.service.solar_panel_calculator_service" class="One\CheckJeHuis\Service\SolarPanelCalculatorService">
+            <argument type="service" id="one.check_je_huis.service.parameter"/>
+        </service>
+
+        <service class="One\CheckJeHuis\Service\CityRemovalService" id="one.check_je_huis.service.city_removal_service">
+            <argument id="one.check_je_huis.repository.city_repository" type="service"/>
+            <argument id="one.check_je_huis.repository.user_repository" type="service"/>
+            <argument id="one.check_je_huis.repository.house_repository" type="service"/>
+            <argument type="service" id="one.check_je_huis.repository.subsidy_repository"/>
+            <argument type="service" id="one.check_je_huis.repository.content_repository"/>
+        </service>
+        
+    </services>
+</container>

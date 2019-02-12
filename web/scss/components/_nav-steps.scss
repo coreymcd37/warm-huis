@@ -1,0 +1,38 @@
+// ====================================================================================================== //
+// NAV STEPS //
+// ====================================================================================================== //
+.nav-steps {
+  color: #AAA;
+  font-weight: bold;
+  padding: 0;
+  padding-top: 15px;
+
+  > div {
+    margin-bottom: 5px;
+  }
+
+  @media (min-width: $sm) {
+    padding: 20px;
+    padding-bottom: 0;
+    display: flex;
+    justify-content: space-between;
+
+    > div {
+      margin-bottom: 0;
+    }
+  }
+
+  a {
+    color: #AAA;
+  }
+
+  .active a {
+    color: #000;
+    text-decoration: none;
+
+    &:hover {
+      color: #000;
+      text-decoration: none;
+    }
+  }
+}

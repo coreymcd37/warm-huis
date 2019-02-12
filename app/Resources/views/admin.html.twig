@@ -1,0 +1,98 @@
+{% extends '::base.html.twig' %}
+
+{% block base_head %}
+
+    {{ parent() }}
+
+    <link type="text/css" rel="stylesheet" media="all" href="{{ asset('datepicker/css/datepicker.css') }}" />
+    <script type="text/javascript" src="{{ asset('datepicker/js/bootstrap-datepicker.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jscolor.min.js') }}"></script>
+
+    <style>
+        * { font-size: 14px; }
+        body { padding-top: 60px; } /* required for bootstrap fixed nav bar */
+        table.table td.no-value-possible { background-color: #EEE; }
+        table.table td.right { text-align: right; }
+        table.table td.value { cursor: pointer; }
+    </style>
+{% endblock %}
+
+{% block base_content %}
+
+    <nav class="navbar navbar-default navbar-fixed-top navbar-collapse" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Admin</a>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#admin-navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse" id="admin-navbar-collapse">
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <ul class="nav navbar-nav">
+                            <li><a href="{{ path('admin_city_list') }}">Omgevingen</a></li>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li><a href="{{ path('admin_user_list') }}">Gebruikers</a></li>
+                        {% endif %}
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Parameters <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ path('admin_parameters') }}">Algemeen</a></li>
+                                <li><a href="{{ path('admin_energy') }}">Verbruik</a></li>
+                                <li><a href="{{ path('admin_surfaces') }}">Afmetingen</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuraties <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ path('admin_matrix') }}">Matrices</a></li>
+                                <li><a href="{{ path('admin_renewables') }}">Hernieuwbare energie</a></li>
+                                <li><a href="{{ path('admin_buildcosts') }}">Bouwkosten</a></li>
+                                <li><a href="{{ path('admin_subsidies') }}">Subsidies</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Teksten <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ path('admin_content', {'type': constant('One\\CheckJeHuis\\Entity\\Content::TYPE_GENERIC')}) }}">Generieke Teksten</a></li>
+                                <li><a href="{{ path('admin_content', {'type': constant('One\\CheckJeHuis\\Entity\\Content::TYPE_SPECIFIC')}) }}">Specifieke Teksten</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="{{ path('admin_config_labels') }}">Config labels</a></li>
+                        <li><a href="{{ path('admin_houses') }}">Data</a></li>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li><a href="{{ path('admin_audit_log_list') }}">Audit Log</a></li>
+                        {% endif %}
+                    </ul>
+
+                    <div class="navbar-form navbar-right">
+                        {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
+                            <a href="{{ path('admin', {'_switch_user': '_exit'}) }}" class="btn btn-danger">Ingelogd als {{ app.user.name }}</a>
+                        {% endif %}
+                        <a href="{{ path('fos_user_security_logout') }}" class="btn btn-default">Afmelden</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid">
+
+        {% if app.session.flashbag.peekAll|length > 0 %}
+            {% for type, messages in app.session.flashbag.all %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ type ? type : '' }}" role="alert">
+                        {{ message|trans({}, domain|default('messages')) }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+
+        {% block content %}
+        {% endblock %}
+    </div>
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends '::base_public.html.twig' %}
+
+{% block base_public_content %}
+    <div class="container">
+        {% if privacy_content %}
+            <div class="row">
+                <div class="col-xs-2 text-right">
+                </div>
+                <div class="col-xs-8">
+                    {{ privacy_content.value | raw }}
+                </div>
+                <div class="col-xs-2 text-right">
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

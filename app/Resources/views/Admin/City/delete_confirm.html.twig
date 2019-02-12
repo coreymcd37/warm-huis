@@ -1,0 +1,11 @@
+{{ form_start(delete_form) }}
+<h3>Verwijder deze omgeving ?</h3>
+    <p>
+        Bent u zeker dat u '{{ city.name }}' wil verwijderen ?<br/>
+        Deze actie kan niet ongedaan gemaakt worden. Ook alle data wordt verwijderd. Download deze eerst via Data in het keuzemenu vooraleer de omgeving te verwijderen.
+    </p>
+    <button type="submit" class="btn btn-danger" title="Klik om verder te gaan">
+        Verwijderen
+    </button>
+    <button type="button" class="btn btn-warning" data-dismiss="modal">Annuleren</button>
+{{ form_end(delete_form) }}

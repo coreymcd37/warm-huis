@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="one.check_je_huis.twig.format_extension" class="One\CheckJeHuis\Twig\FormatExtension">
+            <tag name="twig.extension" />
+        </service>
+        <service id="one.check_je_huis.twig.embed_extension" class="One\CheckJeHuis\Twig\EmbedExtension">
+            <tag name="twig.extension" />
+        </service>
+        <service id="one.check_je_huis.twig.city_extension" class="One\CheckJeHuis\Twig\CityExtension">
+            <argument type="service" id="one.check_je_huis.repository.city_repository" />
+            <tag name="twig.extension" />
+        </service>
+        <service id="one.check_je_huis.twig.flow_extension" class="One\CheckJeHuis\Twig\FlowExtension">
+            <argument type="service" id="one.check_je_huis.service.flow_service" />
+            <tag name="twig.extension" />
+        </service>
+    </services>
+</container>

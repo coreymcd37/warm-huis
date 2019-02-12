@@ -1,0 +1,87 @@
+.house-grade-scale {
+  display: inline-block;
+  position: relative;
+  width: 650px;
+  height: 170px;
+  background: url('../images/grade-scale.png') 50% 70px no-repeat;
+
+  @media (max-width: $sm - 1px) {
+    width: 100%;
+    background-size: 100%;
+  }
+
+  .scale {
+    display: inline-block;
+    position: absolute;
+    width: 100px;
+    top: 100px;
+  }
+
+  .scale-left {
+    left: 0;
+  }
+
+  .scale-center {
+    left: 42%;
+  }
+
+  .scale-right {
+    right: 0%;
+  }
+
+  .house-avg-score {
+    position: absolute;
+    padding-top: 10px;
+    font-weight: bold;
+    top: 0;
+    left: 0;
+  }
+
+  .house-grade-scale-label {
+    font-weight: bold;
+    font-size: 15px;
+    color: #666;
+  }
+
+  .house-avg-score {
+    div,
+    img {
+      &.icon-house {
+        position: absolute;
+        left: -84px;
+        top: -15px;
+      }
+
+      @media (max-width: $sm - 1px) {
+        &.icon-dot {
+          display: none;
+        }
+      }
+
+      &.icon-dot {
+        position: absolute;
+        left: -45px;
+        top: 74px;
+        width: 2px;
+        height: 24px;
+        background-color: #474747;
+        display: block;
+      }
+    }
+
+    .house-grade-scale-text {
+      // position: absolute;
+      // width: 400px;
+      left: 0;
+    }
+
+    .house-grade-scale-text-left {
+      position: absolute;
+      left: -480px;
+    }
+
+    &.neutral img.icon-dot {
+      display: none;
+    }
+  }
+}

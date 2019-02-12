@@ -1,0 +1,21 @@
+# digipolis renovation bundle routes
+one.check_je_huisvations_front:
+    resource:  'routing/routing.front.yml'
+
+one.check_je_huisvations_admin:
+    resource: 'routing/routing.admin.yml'
+
+# FOS User authentication routes
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+fos_user_profile_show:
+    path: /admin
+
+fos_user_resetting_reset:
+    path:     /resetting/reset/{token}
+    defaults: { _controller: one.check_je_huis.controller.resetting_controller:resetAction}
+
+catchall:
+    path:     /{cityParameter}
+    defaults: { _controller: one.check_je_huis.controller.page_controller:indexAction }

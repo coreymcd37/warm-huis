@@ -1,0 +1,252 @@
+{% extends '::pdf.html.twig' %}
+
+{% block base_content %}
+    <div class="page-heading" style="margin: 0; padding: 10px; background: #{{ house.city.backgroundColorHeader }};'">
+        {% if house.city.headerLogoImage() %}
+            <img src="{{ absolute_url(vich_uploader_asset(house.city, 'headerLogoImageFile')) }}" style="max-height:75px" />
+        {% endif %}
+    </div>
+
+    <div class="text-center" style="padding: 20px;">
+        <img src="{{ absolute_url(asset('images/kerktoren zonder ruitjes.gif')) }}" height="250" />
+    </div>
+
+    <div class="text-center" style="padding: 30px;">
+        <h3>Beter wonen</h3>
+
+        <p class="subtext">
+            Maak je woning energiezuinig, bespaar voor het leven.
+        </p>
+
+        <div class="layout-spacer"></div>
+
+        <h3>Renoveer slim, woon energiezuinig</h3>
+
+        <p class="subtext">
+            Energiezuinig wonen hoeft niet ingewikkeld te zijn. Met enkele ingrepen kan je het energieverbruik van je woning serieus beperken.
+        </p>
+
+        <div class="layout-spacer"></div>
+
+        <h3>Meer comfort, minder kosten</h3>
+
+        <p class="subtext">
+            Zo woon je beter en dat is goed voor je portemonnee. Met wat je jaarlijks uitspaart kan je heel wat meer genieten... of opzij zetten voor de keuken van je dromen.
+        </p>
+        <div class="layout-spacer"></div>
+        <div class="row">
+            <div class="col-md-4 col-xs-4">
+                <img src="{{ absolute_url(asset('images/logo/flag_yellow_high.jpg')) }}" width="150" />
+            </div>
+            <div class="col-md-4 col-xs-4">
+                <img src="{{ absolute_url(asset('images/logo/interreg_Vlaanderen-Nederland_RGB.jpg')) }}" width="100" />
+            </div>
+            <div class="col-md-4 col-xs-4">
+                <img src="{{ absolute_url(asset('images/logo/See2Do! - transparante achtergrond.png')) }}" width="75" />
+            </div>
+        </div>
+    </div>
+
+    <div class="page-heading pagebreak" style="margin: 0; padding: 20px; padding-left: 100px; background: #{{ house.city.backgroundColorHeader }};">
+        <h3>Mijn stappenplan</h3>
+    </div>
+
+    <div style="padding: 0 100px;">
+
+        {% if house.placeWindRoofWithoutInsulationChange %}
+            <div class="keeptogether house-improvement">
+                <h3>Dakisolatie</h3>
+
+                <div class="panel-rounded">
+                    <table width="100%">
+                        <tr>
+                            <td width="100">
+                                <img class="house-config-row-icon" src="{{ absolute_url(asset('images/icons/house-roof-mixed.svg')) }}" width="79" height="85" />
+                            </td>
+                            <td>
+                                ik plaats een winddicht onderdak
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <table>
+                    <tr>
+                        <td width="200">Ik investeer</td>
+                        <td>€ {{ calculator.getBuildCostForCategory('roof', true)|f_price }}</td>
+                    </tr>
+                    <tr>
+                        <td>Ik ontvang premies*</td>
+                        <td>€ {{ calculator.getSubsidyForCategory('roof')|f_price }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">&nbsp;</td>
+                    </tr>
+                    {% for subsidy in upgrade.detail.getSubsidies() %}
+                        {% for config in subsidy %}
+                            {% if config.subsidy.slug == 'roof_wind' and config.price %}
+                                <tr>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        {% set label = config.subsidy.category.label %}
+                                        {% if label == 'Specifiek' %}
+                                            {% set label = house.city.name %}
+                                        {% endif %}
+                                        {{ label }}</td>
+                                    <td>€ {{ config.price|f_price }}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </table>
+            </div>
+        {% endif %}
+        {% for cat in configCategories if (house.getUpgradeConfig(cat) or (cat.slug == 'roof' and (house.extraUpgradeRoof))) %}
+            {% include ':Pdf:_section.html.twig' %}
+        {% endfor %}
+
+        {% for renewable in house.getUpgradeRenewables %}
+
+            <div class="keeptogether house-improvement" style="padding-bottom: 10px">
+                <h3>{{ renewable.label }}</h3>
+
+                <div class="panel-rounded">
+                    <table width="100%">
+                        <tr>
+                            <td width="100">
+                                <img class="house-config-row-icon" src="{{ absolute_url(asset('images/icons/house-renewable.svg')) }}" width="79" height="85" />
+                            </td>
+                            <td>
+                                {{ renewable.label }}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <table width="100%">
+                    {% if not (renewable.slug == 'green_power') %}
+                    <tr>
+                        <td width="200">Ik investeer</td>
+                        <td>€ {{ calculator.getBuildCostForRenewable(renewable.slug)|f_price }}</td>
+                    </tr>
+                    <tr>
+                        <td>Ik ontvang premies*</td>
+                        <td>€ {{ calculator.getSubsidyTotalForRenewable(renewable.slug)|f_price }}</td>
+                    </tr>
+                    {% if calculator.getSubsidyTotalForRenewable(renewable.slug) %}
+                    <tr>
+                        <td colspan="2">&nbsp;</td>
+                    </tr>
+                    {% endif %}
+                    {% for subsidyId, price in calculator.getSubsidiesForRenewable(renewable) if price > 0 %}
+                        <tr>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;
+                                {% set label = subsidies[subsidyId].label %}
+                                {% if label == 'Specifiek' %}
+                                    {% set label = house.city.name %}
+                                {% endif %}
+                                {{ label }}</td>
+                            <td>€ {{ price|default(0)|f_price }}</td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>Ik verbruik minder energie</td>
+                        <td>{{ calculator.energyDiffForRenewable(renewable)|f_energy }} kWh/jaar</td>
+                    </tr>
+                    <tr>
+                        <td>Ik bespaar</td>
+                        <td>€ {{ calculator.priceDiffForRenewable(renewable)|f_price }} /jaar</td>
+                    </tr>
+                    {% endif %}
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>{{ calculator.co2DiffForRenewable(renewable)|f_co2 }} kg CO<sub>2</sub>/jaar</td>
+                    </tr>
+                </table>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="page-heading pagebreak" style="margin: 0; padding: 20px; padding-left: 100px; background: #{{ house.city.backgroundColorHeader }};">
+        <h3>Zo wil ik wonen</h3>
+    </div>
+
+    <div class="container-fluid keeptogether">
+
+            <h3 style="padding: 0 50px;">Met dit  stappenplan renoveer je je woning tot een energiezuinige woning van</h3>
+
+            <div class="layout-spacer"></div>
+
+            <div class="container text-center">
+                {% include ":House:energy-scale.html.twig" with { 'calculator': calculator } only %}
+            </div>
+
+
+            <table style="margin-left: 100px;">
+                <tr>
+                    <td width="200">Ik investeer</td>
+                    <td>€ {{ calculator.buildCostTotal|default(0)|f_price }}</td>
+                </tr>
+                <tr>
+                    <td width="200">Via lening***</td>
+                    <td>€ {{ calculator.energyLoanTotal|f_price }} / maand</td>
+                </tr>
+                <tr>
+                    <td>Ik ontvang premies*</td>
+                    <td>€ {{ calculator.subsidyTotal|default(0)|f_price }}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>Ik verbruik minder energie</td>
+                    <td>{{ calculator.energyDiff|f_energy }} kWh/jaar</td>
+                </tr>
+                <tr>
+                    <td>Ik bespaar</td>
+                    <td>€ {{ calculator.priceDiff|f_price }} /jaar</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>{{ calculator.co2Diff|default(0)|f_co2 }} kg CO<sub>2</sub>/jaar</td>
+                </tr>
+            </table>
+
+            <div class="keeptogether" style="padding: 0 100px; padding-top: 30px;">
+                <h3>Beter wonen</h3>
+
+                <p class="justify">
+                    Daalt je energieverbruik dan daalt ook je impact op het klimaat.<br />
+                    Waarvoor onze dank!
+                </p>
+            </div>
+
+            <div class="layout-spacer"></div>
+
+            <div class="keeptogether" style="padding: 0 100px; font-size: 10px">
+                    * Opgelet! Voor beschermde afnemers en andere kwetsbare doelgroepen bestaan er hogere premies en nog enkele specifieke bijkomende premies. Meer info op: www.vlaanderen.be/nl/bouwen-wonen-en-energie/elektriciteit-aardgas-en-verwarming/voordelen-en-premies-voor-elektriciteit-aardgas-en-water-voor-beschermde-klanten.
+                    <br />Meer info en de voorwaarden van de energiepremies van Eandis vind je op www.eandis.be/nl/klant/energie-besparen/overzicht-premies en van Infrax op www.infrax.be/nl/Mijn-premies. Meer info en de voorwaarden van de Vlaamse Renovatiepremie vind je op www.vlaanderen.be/nl/bouwen-wonen-en-energie/bouwen-en-verbouwen/vlaamse-renovatiepremie.
+                <br /><br />
+                    ** Opgelet! De besparing op energieverbruik per ingreep werd berekend op de som van de ingrepen.
+                    Vinkte je naast isolatie ingrepen ook een warmtepomp aan?
+                    Dan wordt ook de energiebesparing die pakweg het isoleren van je dak opbrengt, herrekend in functie van deze ingreep.
+                    Door te isoleren moet je minder verwarmen. Een warmtepomp verbruikt minder energie om te verwarmen.
+                    Beide factoren worden meegenomen in de berekening van je energiebesparing.
+                    Wil je weten wat deze ingreep opbrengt met je huidige verwarmingsketel? Doe dan de simulatie zonder warmtepomp aan te vinken.
+                <br /><br />
+                    *** Via de Vlaamse energielening kan je werken financieren waardoor je energie zal besparen in je woning. Je kan maximaal 15.000 euro lenen. Dit bedrag moet terugbetaald worden over een periode van 8 jaar (10 jaar voor de prioritaire doelgroep van de Vlaamse Energielening). De intrest bedraagt 2% (=2% JKP), kredietnemers uit de prioritaire doelgroep kunnen een renteloze lening (0% JKP) aanvragen. Voor meer informatie contacteer het Energiehuis in je gemeente of surf naar <a href="http://energiesparen.be/energielening">energiesparen.be/energielening</a>. Indien de kosten voor de renovatiewerken aan je woning hoger zijn dan 15.000 €, berekent de tool een gemiddelde maandelijkse afbetaling indien deze werken gefinancierd worden via een lening bij een bank. Opgelet, geld lenen kost ook geld. JKP=Jaarlijks kostenpercentage.
+            </div>
+    </div>
+
+    <div class="page-heading pagebreak" style="margin: 0; padding: 20px; padding-left: 100px; background: #{{ house.city.backgroundColorHeader }};">
+        <h3>&nbsp;</h3>
+    </div>
+    <div class="keeptogether" style="padding: 0 100px;">
+        {% if pdf_extra_content %}
+            {{ pdf_extra_content.value | raw }}
+        {% endif %}
+    </div>
+
+{% endblock %}

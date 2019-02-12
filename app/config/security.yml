@@ -1,0 +1,29 @@
+security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: sha1
+
+    role_hierarchy:
+        ROLE_CITY:        ROLE_USER
+        ROLE_ADMIN:       ROLE_CITY, ROLE_ALLOWED_TO_SWITCH
+
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username_email
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            pattern: ^/
+            form_login:
+                provider: fos_userbundle
+                csrf_provider: form.csrf_provider
+                default_target_path: admin
+            logout:       true
+            anonymous:    true
+            switch_user: true
+
+    access_control:
+        - { path: ^/admin, role: ROLE_CITY }

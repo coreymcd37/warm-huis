@@ -1,0 +1,7 @@
+{
+  "path": {
+    "npm": "./node_modules",
+    "dist": "./web",
+    "src": "./web"
+  }
+}

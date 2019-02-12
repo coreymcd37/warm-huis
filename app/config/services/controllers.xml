@@ -1,0 +1,157 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service
+                id="one.check_je_huis.controller.page_controller"
+                class="One\CheckJeHuis\Controller\PageController"
+        >
+            <argument type="service" id="one.check_je_huis.repository.content_repository" />
+            <argument type="service" id="one.check_je_huis.repository.city_repository"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service
+                id="one.check_je_huis.controller.house_controller"
+                class="One\CheckJeHuis\Controller\HouseController"
+        >
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+            <argument type="service" id="one.check_je_huis.repository.config_repository"/>
+            <argument type="service" id="one.check_je_huis.repository.renewable_repository"/>
+            <argument type="service" id="one.check_je_huis.repository.config_category_repository"/>
+            <argument type="service" id="one.check_je_huis.service.solar_panel_calculator_service"/>
+
+        </service>
+
+        <service
+                id="one.check_je_huis.controller.build_cost_controller"
+                class="One\CheckJeHuis\Controller\Admin\BuildCostController"
+        >
+            <argument type="service" id="one.check_je_huis.repository.build_cost_repository"/>
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service
+                id="one.check_je_huis.controller.config_controller"
+                class="One\CheckJeHuis\Controller\Admin\ConfigController"
+        >
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+            <argument type="service" id="one.check_je_huis.repository.config_repository"/>
+            <argument type="service" id="one.check_je_huis.repository.config_category_repository"/>
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+
+        <service
+                id="one.check_je_huis.controller.content_controller"
+                class="One\CheckJeHuis\Controller\Admin\ContentController"
+        >
+            <argument type="service" id="one.check_je_huis.repository.content_repository" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service
+                id="one.check_je_huis.controller.default_energy_controller"
+                class="One\CheckJeHuis\Controller\Admin\DefaultEnergyController"
+        >
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+            <argument type="service" id="one.check_je_huis.repository.default_energy_repository"/>
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+
+        <service
+                id="one.check_je_huis.controller.defaults_controller"
+                class="One\CheckJeHuis\Controller\Admin\DefaultsController"
+        >
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service
+                id="one.check_je_huis.controller.parameter_controller"
+                class="One\CheckJeHuis\Controller\Admin\ParameterController"
+        >
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service
+                id="one.check_je_huis.controller.renewable_controller"
+                class="One\CheckJeHuis\Controller\Admin\RenewableController"
+        >
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+            <argument type="service" id="one.check_je_huis.repository.renewable_repository"/>
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+
+        <service
+                id="one.check_je_huis.controller.subsidy_controller"
+                class="One\CheckJeHuis\Controller\Admin\SubsidyController"
+        >
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="one.check_je_huis.controller.admin.user_controller" class="One\CheckJeHuis\Controller\Admin\UserController">
+            <argument type="service" id="one.check_je_huis.repository.user_repository" />
+            <argument type="service" id="fos_user.user_manager" />
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="one.check_je_huis.controller.admin.city_controller" class="One\CheckJeHuis\Controller\Admin\CityController">
+            <argument type="service" id="one.check_je_huis.repository.city_repository" />
+            <argument type="service" id="tactician.commandbus"/>
+            <argument type="service" id="one.check_je_huis.service.city_removal_service"/>
+            
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="one.check_je_huis.controller.admin.audit_log_controller" class="One\CheckJeHuis\Controller\Admin\AuditLogController">
+            <argument type="service" id="one.check_je_huis.repository.audit_log_repository" />
+            <argument type="service" id="knp_paginator"/>
+
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="one.check_je_huis.controller.flow_controller" class="One\CheckJeHuis\Controller\FlowController">
+            <argument type="service" id="one.check_je_huis.service.flow_service"/>
+
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="one.check_je_huis.controller.resetting_controller" class="One\CheckJeHuis\Controller\ResettingController">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+    </services>
+</container>

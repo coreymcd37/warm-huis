@@ -1,0 +1,303 @@
+body {
+  height: 100%;
+}
+
+.page-wrapper {
+  height: auto !important;
+  // This line and the next line are not necessary unless you need IE6 support */
+  margin: 0 auto -125px;
+  // the bottom margin is the negative value of the footer's outer height */
+  min-height: 100%;
+}
+
+.page-footer, .page-footer-push {
+  height: 105px;
+  // .page-footer-push must be the same height as .page-footer */
+  margin-top: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+/// ====================================================================================================== //
+// MAIN LAYOUT //
+// ====================================================================================================== //
+.modal-body a:not(.btn) {
+  color: #20bec7;
+  text-decoration: underline;
+
+  &:hover {
+    color: #10ACA5;
+    text-decoration: none;
+  }
+}
+
+.page-heading {
+  color: #FFF;
+  margin-bottom: 10px;
+  background: #2c3e48 url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3gsRDSMqFl/78AAAAA9JREFUCB0BBAD7/wAsPkgBTACzkub7jQAAAABJRU5ErkJggg==');
+}
+
+.page-footer {
+  background: #2c3e48 url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3gsRDSMqFl/78AAAAA9JREFUCB0BBAD7/wAsPkgBTACzkub7jQAAAABJRU5ErkJggg==');
+}
+
+.page-heading {
+  .heading-logo {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  .heading-sidebar-button {
+    padding-top: 35px;
+    padding-right: 20px;
+    font-size: 20px;
+  }
+
+  .heading-save {
+    margin-top: 20px;
+    padding: 3px 3px;
+    margin-right: 20px;
+
+    @media (min-width: $sm) {
+      margin-right: 0;
+    }
+  }
+
+  a {
+    color: #FFF;
+    text-decoration: none;
+
+    &:hover, &:active, &:focus {
+      color: #FFF;
+      text-decoration: none;
+    }
+  }
+}
+
+.page-footer a {
+  color: #FFF;
+  text-decoration: none;
+
+  &:hover, &:active, &:focus {
+    color: #FFF;
+    text-decoration: none;
+  }
+}
+
+.page-heading .page-menu .active a {
+  font-weight: bold;
+}
+
+.page-sub-heading {
+  margin-top: -10px;
+  margin-bottom: 10px;
+  background: url('../images/bg-grid.png');
+  padding: 20px 0;
+  border-bottom: 2px solid #EFEFEF;
+}
+
+
+
+.page-footer .row > div {
+  color: #FFF;
+}
+
+.renewable-toggles a {
+  text-decoration: none;
+  font-size: larger;
+
+  &:hover {
+    text-decoration: none;
+    font-size: larger;
+  }
+}
+
+.layout-spacer {
+  height: 50px;
+}
+
+hr.divider {
+  height: 2px;
+  color: #CCC;
+  background-color: #CCC;
+}
+
+.even-spacing > div {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+
+a.no-decoration {
+  text-decoration: none;
+}
+
+h1 small {
+  font-size: 40%;
+  margin-left: 10px;
+}
+
+h3 small {
+  margin-left: 10px;
+}
+
+.btn.btn-primary {
+  background-color: #20bec7;
+  border-color: #20bec7;
+}
+
+a.list-group-item:hover {
+  background-color: #20bec7;
+  color: #FFF;
+}
+
+.form-control:focus {
+  border-color: #CCC;
+  box-shadow: none;
+}
+
+.list-renewables .input-group {
+  width: 150px;
+}
+
+.list-renewables .solar-panel-inputs {
+  margin-top: 20px;
+  margin-left: 30px;
+  margin-bottom: -10px;
+}
+
+.list-renewables .no-decoration{
+  margin-top: 20px;
+}
+
+.icon-margin {
+  margin-right: 15px;
+}
+// ====================================================================================================== //
+// BOOTSTRAP FORM ADDON //
+// ====================================================================================================== //
+.input-group-addon {
+  position: relative;
+  z-index: 3;
+  left: -2px;
+  background-color: #FFF;
+  font-weight: bold;
+  border-radius: 0;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.max-width {
+  max-width: 100%;
+  height: auto;
+}
+
+
+
+// ====================================================================================================== //
+// MENU //
+// ====================================================================================================== //
+.page-menu {
+  text-align: left;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  > div {
+    margin-bottom: 10px;
+  }
+
+  @media (min-width: $sm) {
+    display: flex;
+    justify-content: space-around;
+
+    > div {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+@media (max-width: $sm - 1px) {
+  .surface .option-container.no-mb .option-icon {
+    margin-bottom: 0;
+    margin-top: 50px;
+
+    .input-group {
+      width: 50%;
+      position: relative;
+      left: 25%;
+    }
+  }
+
+  [name="occupants"] {
+    width: 60px;
+    position: relative;
+    top: -4px;
+    margin: 0 6px;
+    display: inline-block;
+  }
+
+  .owner.form-switch .option-switch-container {
+    margin: 30px 0;
+
+    .option-left,
+    .option-right {
+      font-size: 16px;
+      top: 7px;
+      padding: 0 5px;
+      position: relative;
+    }
+  }
+}
+
+[data-toggle="modal"] {
+  display: inline-block;
+  // margin-top: 10px;
+  .fa-info-circle {
+    font-size: 17px;
+  }
+}
+
+.bottom-page {
+  margin-bottom: 40px;
+}
+
+@media (max-width: 768px) {
+  .homeimages {
+    .col-sm-4 {
+      margin-bottom: 20px;
+
+      img {
+        width: 50%;
+      }
+    }
+  }
+}
+
+.dropdown-toggle {
+  white-space: normal !important;
+}
+
+@media (max-width: 480px) {
+  .homeimages {
+    .col-sm-4 {
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .or {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+}
+
+.dropdown-selector {
+  margin-bottom: 5px;
+}
+
+.required:after {
+  content: " *";
+  color: #cc0000;
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="One\CheckJeHuis\Entity\DefaultEnergy" table="default_energy" repository-class="One\CheckJeHuis\Repository\DefaultEnergyRepository">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="type" type="string" column="type" precision="0" scale="0" nullable="false"/>
+    <field name="size" type="string" column="size" precision="0" scale="0" nullable="false"/>
+    <field name="maxYear" type="string" column="maxYear" precision="0" scale="0" nullable="false"/>
+    <field name="electricity" type="float" column="electricity" precision="0" scale="0" nullable="false"/>
+    <field name="gas" type="float" column="gas" precision="0" scale="0" nullable="false"/>
+    <field name="electricHeating" type="float" column="electricHeating" precision="0" scale="0" nullable="false"/>
+    <field name="oil" type="float" column="oil" precision="0" scale="0" nullable="false"/>
+  </entity>
+</doctrine-mapping>

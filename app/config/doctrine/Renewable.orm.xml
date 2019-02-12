@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="One\CheckJeHuis\Entity\Renewable" table="renewables" repository-class="One\CheckJeHuis\Repository\RenewableRepository">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="slug" type="string" column="slug" precision="0" scale="0" nullable="false"/>
+    <field name="label" type="string" column="label" precision="0" scale="0" nullable="false"/>
+    <field name="value" type="float" column="value" precision="0" scale="0" nullable="false"/>
+    <field name="unit" type="string" column="unit" precision="0" scale="0" nullable="false"/>
+    <many-to-one field="cost" target-entity="One\CheckJeHuis\Entity\BuildCost" inversed-by="relatedRenewables">
+      <join-columns>
+        <join-column name="relatedCost_id" referenced-column-name="id" nullable="1"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

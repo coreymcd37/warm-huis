@@ -1,0 +1,148 @@
+{% extends ':House/Config:base.html.twig' %}
+
+{% set house_config_menu_active = 'renewable' %}
+
+{% block house_config_content %}
+
+    <div class="row">
+
+        <div class="row">
+            <div class="col-xs-12 col-md-8 col-md-offset-2">
+                <div class="col-sm-3">
+                    <img src="/images/icons/house-renewable.svg" width="124" class="hidden-xs" /><br />
+                    Klopt dit niet?<br /> Pas aan wat je al deed om je huis te verbeteren.
+                </div>
+                <div class="col-sm-9 list-renewables">
+                    <h3>Mijn hernieuwbare energie
+                        {% if content.active %}<small class="hidden-xs"><a href="#" data-toggle="modal" data-target="#app-modal"><span class="fa fa-fw fa-info-circle"></span> meer info</a></small>{% endif %}
+                    </h3>
+                    <div class="hidden-sm hidden-md hidden-lg" style="margin-bottom: 10px; font-size: 15.6px;"><a href="#" data-toggle="modal" data-target="#app-modal"><span class="fa fa-fw fa-info-circle"></span> meer info</a></div>
+                    {% for renewable in renewables %}
+                        <div class="list-group-item {% if house.hasRenewable(renewable) %}list-group-item-success{% endif %}">
+                            <div class="checkbox" data-renewable-id="{{ renewable.id }}">
+
+                                <label>
+                                    <input type="checkbox"
+                                           {% if house.hasRenewable(renewable) %}checked="checked"{% endif %}
+                                           name="renewables[{{ renewable.slug }}]"
+                                    > {{ renewable.label }}
+                                </label>
+
+                            {% if renewable.slug == 'solar_panels' %}
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-12 solar-panel-inputs">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-6">Oppervlakte</label>
+                                                <div class="input-group col-md-4">
+                                                    <input type="text" class="form-control solarpanels"
+                                                           name="solar_surface"
+                                                           id="house-solar-wp" value="{{ house.solarPanelsSurface }}"
+                                                           data-default="{{ solarPanel.defaults.surface }}" />
+                                                    <div class="input-group-addon">m²</div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-6">Aantal zonnepanelen</label>
+                                                <div class="input-group col-md-4">
+                                                    <input type="text" class="form-control solarpanels"
+                                                           name="solar_count"
+                                                           id="house-solar-count-wp"
+                                                           value="{{ house.solarPanelCount }}"
+                                                           data-default="{{ solarPanel.defaults.count }}" />
+                                                    <div class="input-group-addon">aantal</div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-6">Piekvermogen</label>
+                                                <div class="input-group col-md-4">
+                                                    <input type="text" class="form-control solarpanels"
+                                                           name="solar_peak"
+                                                           id="house-solar-peak-wp"
+                                                           value="{{ house.solarPanelPeak }}"
+                                                           data-default="{{ solarPanel.defaults.peak }}" />
+                                                    <div class="input-group-addon">Wp</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layout-spacer"></div>
+
+    {# form is ajaxed, replaced submit with direct link to next page #}
+    <a class="btn btn-primary pull-right form-ajax-refresh-indicator btn-next-checked-height" href="{{ path('house_flow_next', {'route' : app.request.get('_route')}) }}">Verder gaan</a>
+
+    <script type="text/javascript">
+        $('body').on('click', '.list-renewables .list-group-item', function (e) {
+
+            var $item       = $(this);
+            var $checkbox   = $item.find('input[type=checkbox]');
+            var id          = $item.find('.checkbox').attr('data-renewable-id');
+
+            if ($checkbox.attr('name') === 'renewables[solar_panels]' && !$checkbox.is(":checked")) {
+                $('.solarpanels').each(function(){
+                    $(this).val($(this).data('default'));
+                    $(this).prop('disabled', '');
+                });
+            }
+
+            $.ajax({
+                url: '{{ path('house_toggle_renewable') }}',
+                data: {
+                    renewable: id
+                },
+                success: function (response) {
+                    if (response.success) {
+                        if (response.data.active) {
+                            $item.addClass('list-group-item-success');
+                            $checkbox.prop('checked', true);
+                        } else {
+                            $item.removeClass('list-group-item-success');
+                            $checkbox.prop('checked', false);
+                        }
+                    }
+                }
+            });
+
+            e.preventDefault();
+            return false;
+
+        });
+
+        $('.solarpanels').on('change', function () {
+            let val = $(this).val();
+            $('.solarpanels').prop('disabled', 'disabled');
+            $('.solarpanels').val('');
+            $(this).prop('disabled', '');
+            $(this).val(val);
+            $.ajax({
+                url: '{{ path('house_update_solar_wp') }}',
+                data: {
+                    name: $(this).attr('name'),
+                    value: $(this).val()
+                }
+            });
+        }).on('click', function (e) {
+            e.preventDefault();
+            return false;
+        });
+
+    </script>
+
+{% endblock %}
+
+{% block app_modal_content %}
+    <div class="text-center">
+
+        {{ content.value|raw }}
+
+    </div>
+{% endblock %}

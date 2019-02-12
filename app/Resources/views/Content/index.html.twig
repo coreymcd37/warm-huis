@@ -1,0 +1,32 @@
+{% extends '::admin.html.twig' %}
+
+{% block content %}
+
+    <div class="container">
+
+        {% if type == constant('One\\CheckJeHuis\\Entity\\Content::TYPE_GENERIC') %}
+            <h1>Generieke Teksten</h1>
+        {% else %}
+            <h1>Specifieke Teksten</h1>
+        {% endif %}
+        <table class="table table-striped">
+            <tr>
+                <th>pagina</th>
+                <th>acties</th>
+            </tr>
+            {% for content in contents %}
+                <tr>
+                    <td>{{ content.label }}</td>
+                    <td class="text-right">
+                        {% if content.canEdit(app.user) %}
+                            <a href="{{ path('admin_content_edit', { content: content.id }) }}" class="btn btn-primary">aanpassen</a>
+                        {% else %}
+                            <a href="{{ path('admin_content_view', { content: content.id }) }}" class="btn btn-primary">bekijken</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+{% endblock %}

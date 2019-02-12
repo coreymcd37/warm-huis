@@ -1,0 +1,100 @@
+{% extends '::app.html.twig' %}
+
+{% set layout_menu_active = 'plan' %}
+
+{% block content %}
+
+    <div class="page-sub-heading">
+        <div class="container text-center">
+            <img src="{{ asset('images/kerktoren.png') }}" height="250" />
+            <h3>Beter wonen</h3>
+            <p>
+                Daalt je energieverbruik dan daalt ook de impact op het klimaat.
+                Elk energiezuinig gerenoveerd huis brengt ons een stap dichter bij
+                een ideale wereld.
+            </p>
+            <p><strong>Waarvoor onze dank!</strong></p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="alert alert-success" style="display: none;" id="mail-sent">Het stappenplan werd naar je e-mail verstuurd.</div>
+        <div class="row">
+            <div class="col-xs-2 text-right">
+            </div>
+            <div class="col-xs-8">
+                <h3>Mijn plan</h3>
+                <p>
+                    Bekijk de details per ingreep. Wat kost het en wat brengt het op?<br />
+                    Download mijn persoonlijk stappenplan.
+                </p>
+                <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#app-modal">Download mijn plan</a>
+            </div>
+            <div class="col-xs-2 text-right">
+            </div>
+        </div>
+        {% if plan_extra_content %}
+            <div class="row">
+                <div class="col-xs-2 text-right">
+                </div>
+                <div class="col-xs-8">
+                {{ plan_extra_content.value | raw }}
+                </div>
+                <div class="col-xs-2 text-right">
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="layout-spacer"></div>
+
+{% endblock %}
+
+
+{% block app_modal_content %}
+    <div class="container-fluid">
+        <form method="post" action="{{ path('house_mail_pdf') }}">
+            <div class="form-group">
+                <label class="control-label">Klik hier om je stappenplan te downloaden</label><br>
+                <a href="{{ path('house_download_pdf') }}" class="btn btn-primary">Download mijn stappenplan</a>
+            </div>
+
+            <div class="layout-spacer"></div>
+
+            {{ form_widget(form._token) }}
+            {{ form_row(form.email) }}
+            {{ form_errors(form.email) }}
+            <div class="form-group">
+            {{ form_label(form.address) }} <sup>(niet verplicht)</sup>
+            {{ form_widget(form.address) }}
+            </div>
+
+            <div class="row">
+                <div class="col-xs-6">
+                    {{ form_widget(form.postalCode) }}
+                </div>
+                <div class="col-xs-6">
+                    {{ form_widget(form.cityName) }}
+                </div>
+            </div>
+
+            {% if form.newsletter is defined %}
+                {{ form_row(form.newsletter) }}
+            {% endif %}
+
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <input type="submit" class="btn btn-primary" name="mail" value="Verstuur mijn stappenplan" />
+                </div>
+            </div>
+
+            <div class="layout-spacer"></div>
+
+            {% if pdf_popup_content %}
+                {{ pdf_popup_content.value | raw }}
+                <div class="layout-spacer"></div>
+            {% endif %}
+        </form>
+    </div>
+{% endblock %}

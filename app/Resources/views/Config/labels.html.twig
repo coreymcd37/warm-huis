@@ -1,0 +1,23 @@
+{% extends '::admin.html.twig' %}
+
+{% block content %}
+
+    <div class="container">
+        <form method="post">
+            {% for category in categories %}
+                <h4>{{ category.label }}</h4>
+                {% for config in category.configs %}
+                    <fieldset class="form-group">
+                        <div class="form-input">
+                            <input type="text" name="config[{{ config.id }}]" value="{{ config.label }}" placeholder="{{ config.label }}" class="form-control" {% if not is_granted("ROLE_ADMIN") %}readonly{% endif %}/>
+                        </div>
+                    </fieldset>
+                {% endfor %}
+            {% endfor %}
+            {% if is_granted("ROLE_ADMIN") %}
+                <button type="submit" class="btn btn-primary">Opslaan</button>
+            {% endif %}
+        </form>
+    </div>
+
+{% endblock %}

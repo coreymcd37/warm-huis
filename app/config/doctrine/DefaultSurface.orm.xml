@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="One\CheckJeHuis\Entity\DefaultSurface" table="default_surfaces" repository-class="One\CheckJeHuis\Repository\DefaultSurfaceRepository">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="type" type="string" column="type" precision="0" scale="0" nullable="false"/>
+    <field name="size" type="string" column="size" precision="0" scale="0" nullable="false"/>
+    <field name="livingArea" type="float" column="livingArea" precision="0" scale="0" nullable="false"/>
+    <field name="floor" type="float" column="floor" precision="0" scale="0" nullable="false"/>
+    <field name="facade" type="float" column="facade" precision="0" scale="0" nullable="false"/>
+    <field name="window" type="float" column="window" precision="0" scale="0" nullable="false"/>
+  </entity>
+</doctrine-mapping>

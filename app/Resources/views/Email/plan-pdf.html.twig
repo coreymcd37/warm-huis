@@ -1,0 +1,16 @@
+{% extends '::email.html.twig' %}
+
+{% block base_content %}
+
+    <div class="page-heading" style="background: #{{ house.city.backgroundColorHeader }}; padding: 10px;">
+        {% if house.city.headerLogoImage() %}
+            <img src="{{ absolute_url(vich_uploader_asset(house.city, 'headerLogoImageFile')) }}" height="50" />
+        {% endif %}
+
+        <h1 style="color: #FFF">Mijn Warm Huis</h1>
+    </div>
+
+    <p>
+        {{ content.value | raw }}
+    </p>
+{% endblock %}

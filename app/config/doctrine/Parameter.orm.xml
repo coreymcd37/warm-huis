@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="One\CheckJeHuis\Entity\Parameter" table="parameters" repository-class="One\CheckJeHuis\Repository\ParameterRepository">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="slug" type="string" column="slug" precision="0" scale="0" unique="true" nullable="false"/>
+    <field name="label" type="string" column="label" precision="0" scale="0" nullable="false"/>
+    <field name="value" type="float" column="value" precision="0" scale="0" nullable="false"/>
+    <field name="unit" type="string" column="unit" precision="0" scale="0" nullable="false"/>
+    <many-to-one target-entity="One\CheckJeHuis\Entity\City" field="city" />
+  </entity>
+</doctrine-mapping>

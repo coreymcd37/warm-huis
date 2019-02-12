@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="One\CheckJeHuis\Entity\ConfigTransformation" table="config_transformations" repository-class="One\CheckJeHuis\Repository\ConfigTransformationRepository">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="value" type="float" column="value" precision="0" scale="0" nullable="false"/>
+    <field name="unit" type="string" column="unit" precision="0" scale="0" nullable="false"/>
+    <field name="inverse" type="boolean" column="inverse" precision="0" scale="0" nullable="false"/>
+    <many-to-one field="fromConfig" target-entity="One\CheckJeHuis\Entity\Config" inversed-by="transformations">
+      <join-columns>
+        <join-column name="fromConfig_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="toConfig" target-entity="One\CheckJeHuis\Entity\Config" inversed-by="transformationEnds">
+      <join-columns>
+        <join-column name="toConfig_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

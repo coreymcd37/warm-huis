@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="One\CheckJeHuis\Entity\BuildCost" table="build_costs" repository-class="One\CheckJeHuis\Repository\BuildCostRepository">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="ordering" type="integer" column="ordering" precision="0" scale="0" nullable="false"/>
+    <field name="slug" type="string" column="slug" precision="0" scale="0" nullable="false"/>
+    <field name="label" type="string" column="label" precision="0" scale="0" nullable="false"/>
+    <field name="value" type="float" column="value" precision="0" scale="0" nullable="false"/>
+    <field name="unit" type="string" column="unit" precision="0" scale="0" nullable="false"/>
+    <one-to-many field="relatedConfigs" target-entity="One\CheckJeHuis\Entity\Config" mapped-by="cost"/>
+    <one-to-many field="relatedRenewables" target-entity="One\CheckJeHuis\Entity\Renewable" mapped-by="cost"/>
+  </entity>
+</doctrine-mapping>

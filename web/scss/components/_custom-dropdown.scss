@@ -1,0 +1,67 @@
+/// ====================================================================================================== //
+// CUSTOM CONFIG DROPDOWNS //
+// ====================================================================================================== //
+.house-config-row {
+  padding-top: 15px;
+  padding-bottom: 30px;
+}
+
+.house-config-row-stick {
+  padding-top: 0;
+  margin-top: -30px;
+}
+
+.house-config-row .house-config-row-icon {
+  margin-top: -15px;
+}
+
+.house-config-dropdown {
+  position: relative;
+
+  .btn {
+    text-align: left;
+  }
+
+  .icon {
+    float: right;
+    padding-top: 3px;
+    padding-right: 5px;
+  }
+
+  &.double .icon {
+    padding-top: 10px;
+  }
+
+  .dropdown-options {
+    display: none;
+    position: absolute;
+    top: 35px;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+  }
+
+  &.double .dropdown-options {
+    top: 54px;
+  }
+
+  &.good .btn {
+    color: #FFF;
+    background-color: #13c886;
+    border: 0;
+  }
+
+  &.bad .btn {
+    color: #FFF;
+    background-color: #ed172f;
+    border: 0;
+  }
+}
+
+.list-group-item-success {
+  background-color: #13c886;
+
+  label {
+    color: #FFF;
+  }
+}

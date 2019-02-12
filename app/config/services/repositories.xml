@@ -1,0 +1,72 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="one.check_je_huis.repository.build_cost_repository" class="One\CheckJeHuis\Repository\BuildCostRepository">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository" />
+            <argument type="string">One\CheckJeHuis\Entity\BuildCost</argument>
+        </service>
+        <service id="one.check_je_huis.repository.config_repository" class="One\CheckJeHuis\Repository\ConfigRepository">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository" />
+            <argument type="string">One\CheckJeHuis\Entity\Config</argument>
+        </service>
+        <service id="one.check_je_huis.repository.config_category_repository" class="One\CheckJeHuis\Repository\ConfigCategoryRepository">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository" />
+            <argument type="string">One\CheckJeHuis\Entity\ConfigCategory</argument>
+        </service>
+        <service id="one.check_je_huis.repository.config_transformation_repository" class="One\CheckJeHuis\Repository\ConfigTransformationRepository">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository" />
+            <argument type="string">One\CheckJeHuis\Entity\ConfigTransformation</argument>
+        </service>
+        <service id="one.check_je_huis.repository.content_repository" class="One\CheckJeHuis\Repository\ContentRepository">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository" />
+            <argument type="string">One\CheckJeHuis\Entity\Content</argument>
+        </service>
+        <service id="one.check_je_huis.repository.default_energy_repository" class="One\CheckJeHuis\Repository\DefaultEnergyRepository">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository" />
+            <argument type="string">One\CheckJeHuis\Entity\DefaultEnergy</argument>
+        </service>
+        <service id="one.check_je_huis.repository.default_roof_repository" class="One\CheckJeHuis\Repository\DefaultRoofRepository">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository" />
+            <argument type="string">One\CheckJeHuis\Entity\DefaultRoof</argument>
+        </service>
+        <service id="one.check_je_huis.repository.default_surface_repository" class="One\CheckJeHuis\Repository\DefaultSurfaceRepository">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository" />
+            <argument type="string">One\CheckJeHuis\Entity\DefaultSurface</argument>
+        </service>
+        <service id="one.check_je_huis.repository.house_repository" class="One\CheckJeHuis\Repository\HouseRepository">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository" />
+            <argument type="string">One\CheckJeHuis\Entity\House</argument>
+        </service>
+        <service id="one.check_je_huis.repository.parameter_repository" class="One\CheckJeHuis\Repository\ParameterRepository">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository" />
+            <argument type="string">One\CheckJeHuis\Entity\Parameter</argument>
+        </service>
+        <service id="one.check_je_huis.repository.renewable_repository" class="One\CheckJeHuis\Repository\RenewableRepository">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository" />
+            <argument type="string">One\CheckJeHuis\Entity\Renewable</argument>
+        </service>
+        <service id="one.check_je_huis.repository.subsidy_repository" class="One\CheckJeHuis\Repository\SubsidyRepository">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository" />
+            <argument type="string">One\CheckJeHuis\Entity\Subsidy</argument>
+        </service>
+        <service id="one.check_je_huis.repository.subsidy_category_repository" class="One\CheckJeHuis\Repository\SubsidyCategoryRepository">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository" />
+            <argument type="string">One\CheckJeHuis\Entity\SubsidyCategory</argument>
+        </service>
+        <service id="one.check_je_huis.repository.user_repository" class="One\CheckJeHuis\Repository\UserRepository">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository" />
+            <argument type="string">One\CheckJeHuis\Entity\User</argument>
+        </service>
+        <service id="one.check_je_huis.repository.city_repository" class="One\CheckJeHuis\Repository\CityRepository">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository" />
+            <argument type="string">One\CheckJeHuis\Entity\City</argument>
+        </service>
+        <service id="one.check_je_huis.repository.audit_log_repository" class="One\CheckJeHuis\Repository\AuditLogRepository">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository" />
+            <argument type="string">One\CheckJeHuis\Entity\AuditLog</argument>
+        </service>
+    </services>
+</container>

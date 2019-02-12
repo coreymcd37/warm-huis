@@ -1,0 +1,21 @@
+// ====================================================================================================== //
+// ENERGY PAGE //
+// ====================================================================================================== //
+.option-list .option-list-item {
+  margin-bottom: 50px;
+  padding-left: 30px;
+  background: url('../images/radio-off.png') 0 2px no-repeat;
+  background-position: 8px 8px;
+  &.active {
+    background-image: url('../images/radio-on.png');
+  }
+}
+
+.list-align-checkbox .checkbox {
+  display: inline-block;
+  width: 30px;
+
+  input {
+    margin: 0;
+  }
+}

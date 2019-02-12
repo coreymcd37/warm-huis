@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="One\CheckJeHuis\Entity\Content" table="content" repository-class="One\CheckJeHuis\Repository\ContentRepository">
+    <unique-constraints>
+      <unique-constraint columns="slug,city_id" name="slug_city_idx" />
+    </unique-constraints>
+
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="slug" type="string" column="slug" precision="0" scale="0" nullable="false"/>
+    <field name="label" type="string" column="label" precision="0" scale="0" nullable="false"/>
+    <field name="value" type="text" column="value" precision="0" scale="0" nullable="false"/>
+    <field name="canDeactivate" type="boolean" column="canDeactivate" precision="0" scale="0" nullable="false"/>
+    <field name="active" type="boolean" column="active" precision="0" scale="0" nullable="false"/>
+
+    <many-to-one target-entity="One\CheckJeHuis\Entity\City" field="city" />
+  </entity>
+</doctrine-mapping>

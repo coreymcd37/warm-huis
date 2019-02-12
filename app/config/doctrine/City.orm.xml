@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="One\CheckJeHuis\Entity\City" table="city" repository-class="One\CheckJeHuis\Repository\CityRepository">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="name" type="string" />
+    <field name="cityName" type="string" nullable="true" />
+    <field name="postalCode" type="string" nullable="true" />
+    <field name="prefillCity" type="boolean" />
+    <field name="nisNumber" type="string" />
+    <field name="email" type="string" />
+    <field name="url" type="string" />
+    <field name="headerLogoImage" type="string" nullable="true" />
+    <field name="footerLogoLink" type="string" nullable="true" />
+    <field name="footerLogoImage" type="string" nullable="true" />
+    <field name="backgroundColorHeader" type="string" />
+    <field name="backgroundColor" type="string" />
+    <field name="buttonColor" type="string" />
+    <field name="textColor" type="string" />
+    <field name="textColorHeader" type="string" />
+    <field name="showInDropdown" type="boolean" />
+    <field name="showSpecificInfo" type="boolean" />
+    <field name="javascriptBottom" type="text" nullable="true" />
+    <field name="sunPotentialMapLink" type="string" nullable="true" />
+    <field name="thermographicPhotoLink" type="string" nullable="true" />
+    <field name="thermographicPhotoImage" type="string" nullable="true" />
+    <field name="stayUpToDate" type="integer" nullable="true" />
+    <field name="defaults" type="json_array" nullable="true" />
+    <field name="createdAt" type="datetime" />
+    <field name="updatedAt" type="datetime" />
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="kernel.listener.referer_listener" class="One\CheckJeHuis\EventListener\RefererListener">
+            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest"/>
+            <argument type="service" id="session"/>
+            <argument>%known_referers%</argument>
+        </service>
+
+        <service id="one.check_je_huis.event_listener.router_listener" class="One\CheckJeHuis\EventListener\RouterListener">
+            <argument type="service" id="one.check_je_huis.service.flow_service"/>
+            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
+        </service>
+
+        <service id="one.check_je_huis.event_listener.entity_listener" class="One\CheckJeHuis\EventListener\EntityListener">
+            <argument type="service" id="security.token_storage"/>
+            <tag name="doctrine.event_listener" event="onFlush"/>
+        </service>
+
+        <service id="one.check_je_huis.event_listener.p3presponse_listener" class="One\CheckJeHuis\EventListener\P3PResponseListener">
+            <tag name="kernel.event_listener" event="kernel.response" method="onKernelResponse" />
+        </service>
+
+        <service id="one.check_je_huis.event_listener.cookie_consent_listener" class="One\CheckJeHuis\EventListener\CookieConsentListener">
+            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
+        </service>
+
+        <service id="one.check_je_huis.event_listener.houses_export_listener" class="One\CheckJeHuis\EventListener\HousesExportListener">
+            <tag name="kernel.event_listener" event="housesExport" method="onHousesExport"/>
+            <argument type="service" id="security.token_storage"/>
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+
+    </services>
+</container>

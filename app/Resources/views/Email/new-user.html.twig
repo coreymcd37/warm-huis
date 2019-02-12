@@ -1,0 +1,15 @@
+{% extends '::email.html.twig' %}
+
+{% block base_content %}
+
+    <p>
+        Hallo {{ user.name }}!<br><br>
+        Klik op volgende link om je wachtwoord (opnieuw) in te stellen:
+        <a href="{{ url('fos_user_resetting_reset', { token: user.confirmationToken }) }}">{{ url('fos_user_resetting_reset', { token: user.confirmationToken }) }}</a>
+        <br/>
+        <br>
+        Met vriendelijke groeten,<br><br>
+        het Mijn Warm Huis-team <br>
+    </p>
+
+{% endblock %}

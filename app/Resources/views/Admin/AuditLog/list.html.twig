@@ -1,0 +1,27 @@
+{% extends '::admin.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <h4>Audit Log</h4>
+        <table class="table table-striped">
+            <tr>
+                <th>Object</th>
+                <th>Id</th>
+                <th>Gebruiker</th>
+                <th>Datum</th>
+            </tr>
+            {% for log in logs %}
+                <tr>
+                    <td><a href="{{ path('admin_audit_log_view', { 'id': log.id }) }}">{{ log.objectName }}</a></td>
+                    <td>{{ log.identifier }}</td>
+                    <td>{{ log.username }}</td>
+                    <td>{{ log.createdAt | date('H:i:s d/m/Y')}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <div class="navigation">
+            {{ knp_pagination_render(logs) }}
+        </div>
+    </div>
+{% endblock %}

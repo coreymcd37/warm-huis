@@ -1,0 +1,33 @@
+{% extends '::base.html.twig' %}
+
+{% block base_content %}
+
+    <div class="container">
+
+        <div class="layout-spacer hidden-sm hidden-xs"></div>
+
+        <div class="row">
+            <div class="col-md-5">
+                {{ content.value|raw }}
+                <form action="{{ path('app_start') }}" method="post">
+                    <div class="dropdown">
+                        <label for="select-city">Selecteer uw stad of gemeente :</label>
+                        <select class="form-control" id="select-city" name="city">
+                        {% for city in cities %}
+                            <option value="{{ city.id }}">{{ city.name }}</option>
+                        {% endfor %}
+                        </select>
+                        <br/>
+                        <input type="submit" class="btn btn-primary pull-right" value="Start" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="text-center">
+
+        </div>
+
+    </div>
+
+{% endblock %}

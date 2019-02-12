@@ -1,0 +1,68 @@
+{
+    "name": "mijn-warm-huis",
+    "license": "MIT",
+    "type": "project",
+    "autoload": {
+         "psr-4": { "One\\CheckJeHuis\\": "src/" },
+         "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
+    },
+    "autoload-dev": {
+        "files": [ "vendor/symfony/symfony/src/Symfony/Component/VarDumper/Resources/functions/dump.php" ]
+    },
+    "require": {
+        "php": ">=7",
+        "deployer/deployer": "^5.1",
+        "deployer/recipes": "^4.0",
+        "doctrine/doctrine-bundle": "~1.4",
+        "doctrine/doctrine-migrations-bundle": "~1.0",
+        "doctrine/migrations": "1.0.*@dev",
+        "doctrine/orm": "^2.4.8",
+        "friendsofsymfony/user-bundle": "~2.0",
+        "h4cc/wkhtmltopdf-amd64": "~0.12",
+        "incenteev/composer-parameter-handler": "~2.0",
+        "knplabs/knp-paginator-bundle": "^2.6",
+        "knplabs/knp-snappy-bundle": "~1.2",
+        "league/tactician": "^1.0",
+        "league/tactician-bundle": "^0.4.1",
+        "league/tactician-doctrine": "^1.1",
+        "sensio/framework-extra-bundle": "^3.0.2",
+        "symfony/assetic-bundle": "~2.8",
+        "symfony/monolog-bundle": "^3.0.2",
+        "symfony/swiftmailer-bundle": "~2.5",
+        "symfony/symfony": "^2.8",
+        "trsteel/ckeditor-bundle": "~1.5",
+        "twig/extensions": "~1.0",
+        "twig/twig": "^1.0||^2.0",
+        "vich/uploader-bundle": "^1.6"
+    },
+    "require-dev": {
+        "sensio/generator-bundle": "~3.0",
+        "phpunit/phpunit": "^5.1",
+        "symfony/phpunit-bridge": "~2.7"
+    },
+    "scripts": {
+         "symfony-scripts": [
+             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+         ]
+     },
+     "config": {
+         "bin-dir": "bin",
+         "sort-packages": true
+     },
+     "extra": {
+         "symfony-app-dir": "app",
+         "symfony-web-dir": "web",
+         "symfony-assets-install": "relative",
+         "incenteev-parameters": {
+             "file": "app/config/parameters.yml"
+         },
+         "branch-alias": {
+            "dev-master": "2.8-dev"
+         }
+     }
+}

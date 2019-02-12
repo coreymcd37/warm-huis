@@ -1,0 +1,31 @@
+// ====================================================================================================== //
+// CONFIGURATION SWITCH //
+// ====================================================================================================== //
+.form-switch .option-switch-container {
+  text-align: center;
+
+  div {
+    display: inline-block;
+    height: 30px;
+  }
+
+  .option-left, .option-right {
+    font-size: 25px;
+    vertical-align: middle;
+    padding: 0 20px;
+  }
+
+  .option-switch {
+    width: 64px;
+    cursor: pointer;
+    background: #FFF 50% 50% no-repeat;
+
+    &.switch-left {
+      background-image: url('../images/switch-off.png');
+    }
+
+    &.switch-right {
+      background-image: url('../images/switch-on.png');
+    }
+  }
+}

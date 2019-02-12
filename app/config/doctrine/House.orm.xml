@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="One\CheckJeHuis\Entity\House" table="houses" repository-class="One\CheckJeHuis\Repository\HouseRepository">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="token" type="string" column="token" precision="0" scale="0" unique="true" nullable="false"/>
+    <field name="lastKnownRoute" type="string" column="lastKnownRoute" precision="0" scale="0" nullable="true"/>
+    <field name="lastUpdate" type="datetime" column="lastUpdate" precision="0" scale="0" nullable="false"/>
+    <field name="address" type="string" column="address" precision="0" scale="0" nullable="true"/>
+    <field name="newsletter" type="boolean" column="newsletter" precision="0" scale="0" nullable="true"/>
+    <field name="email" type="string" column="email" precision="0" scale="0" nullable="true"/>
+    <field name="buildingType" type="string" column="buildingType" precision="0" scale="0" nullable="false"/>
+    <field name="roofType" type="string" column="roofType" precision="0" scale="0" nullable="false"/>
+    <field name="size" type="string" column="size" precision="0" scale="0" nullable="false"/>
+    <field name="ownership" type="string" column="ownership" precision="0" scale="0" nullable="false"/>
+    <field name="year" type="string" column="year" precision="0" scale="0" nullable="false"/>
+    <field name="occupants" type="string" column="occupants" precision="0" scale="0" nullable="false"/>
+    <field name="consumptionGas" type="float" column="consumptionGas" precision="0" scale="0" nullable="true"/>
+    <field name="consumptionElec" type="float" column="consumptionElec" precision="0" scale="0" nullable="true"/>
+    <field name="consumptionOil" type="float" column="consumptionOil" precision="0" scale="0" nullable="true"/>
+    <field name="surfaceLivingArea" type="float" column="surfaceLivingArea" precision="0" scale="0" nullable="true"/>
+    <field name="surfaceFloor" type="float" column="surfaceFloor" precision="0" scale="0" nullable="true"/>
+    <field name="surfaceFacade" type="float" column="surfaceFacade" precision="0" scale="0" nullable="true"/>
+    <field name="surfaceWindow" type="float" column="surfaceWindow" precision="0" scale="0" nullable="true"/>
+    <field name="surfaceRoof" type="float" column="surfaceRoof" precision="0" scale="0" nullable="true"/>
+    <field name="surfaceRoofExtra" type="float" column="surfaceRoofExtra" precision="0" scale="0" nullable="true"/>
+    <field name="electricHeating" type="boolean" column="electricHeating" precision="0" scale="0" nullable="false"/>
+    <field name="hasWindroof" type="boolean" column="hasWindroof" precision="0" scale="0" nullable="false"/>
+    <field name="placeWindroof" type="boolean" column="placeWindroof" precision="0" scale="0" nullable="false"/>
+    <field name="solarPanelsKWHPiek" type="float" column="solarPanelsKWHPiek" precision="0" scale="0" nullable="false"/>
+    <field name="solarPanelCount" type="float" column="solarPanelCount" precision="0" scale="0" nullable="false"/>
+    <field name="solarPanelPeak" type="float" column="solarPanelPeak" precision="0" scale="0" nullable="false"/>
+    <field name="visitedRoutes" type="json_array" nullable="true" />
+    <field name="cityName" type="text" nullable="true" length="255" />
+    <field name="postalCode" type="text" nullable="true" length="10" />
+
+    <many-to-one field="defaultEnergy" target-entity="One\CheckJeHuis\Entity\DefaultEnergy">
+      <join-columns>
+        <join-column name="defaultEnergy_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="defaultSurface" target-entity="One\CheckJeHuis\Entity\DefaultSurface">
+      <join-columns>
+        <join-column name="defaultSurface_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="defaultRoof" target-entity="One\CheckJeHuis\Entity\DefaultRoof">
+      <join-columns>
+        <join-column name="defaultRoof_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="defaultRoofIfFlat" target-entity="One\CheckJeHuis\Entity\DefaultRoof">
+      <join-columns>
+        <join-column name="defaultRoofIfFlat_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="extraConfigRoof" target-entity="One\CheckJeHuis\Entity\Config">
+      <join-columns>
+        <join-column name="extraConfigRoof_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="extraUpgradeRoof" target-entity="One\CheckJeHuis\Entity\Config">
+      <join-columns>
+        <join-column name="extraUpgradeRoof_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one target-entity="One\CheckJeHuis\Entity\City" field="city" />
+    <many-to-many field="configs" target-entity="One\CheckJeHuis\Entity\Config">
+      <join-table name="house_config">
+        <join-columns>
+          <join-column name="house_id" referenced-column-name="id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="config_id" referenced-column-name="id" nullable="1"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+    <many-to-many field="renewables" target-entity="One\CheckJeHuis\Entity\Renewable">
+      <join-table name="house_renewable">
+        <join-columns>
+          <join-column name="renewable_id" referenced-column-name="id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="house_id" referenced-column-name="id" nullable="1"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+    <many-to-many field="upgradeConfigs" target-entity="One\CheckJeHuis\Entity\Config">
+      <join-table name="house_upgrade_config">
+        <join-columns>
+          <join-column name="house_id" referenced-column-name="id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="upgrade_config_id" referenced-column-name="id" nullable="1"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+    <many-to-many field="upgradeRenewables" target-entity="One\CheckJeHuis\Entity\Renewable">
+      <join-table name="house_upgrade_renewable">
+        <join-columns>
+          <join-column name="upgrade_renewable_id" referenced-column-name="id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="house_id" referenced-column-name="id" nullable="1"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+    <lifecycle-callbacks>
+      <lifecycle-callback type="prePersist" method="setLastUpdate"/>
+      <lifecycle-callback type="preUpdate" method="setLastUpdate"/>
+    </lifecycle-callbacks>
+  </entity>
+</doctrine-mapping>

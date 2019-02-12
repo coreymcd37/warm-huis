@@ -1,0 +1,25 @@
+{% extends '::admin.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <h4>Audit Log detail</h4>
+        <table class="table table-striped">
+            <tr>
+                <td>Object</td>
+                <td>{{ log.objectName }}</td>
+            </tr><tr>
+                <td>Id</td>
+                <td>{{ log.identifier }}</td>
+            </tr><tr>
+                <td>Gebruiker</td>
+                <td>{{ log.username }}</td>
+            </tr><tr>
+                <td>Datum</td>
+                <td>{{ log.createdAt | date('H:i:s d/m/Y')}}</td>
+            </tr><tr>
+                <td>Veranderingen</td>
+                <td>{{ log.changes | json_encode(constant('JSON_PRETTY_PRINT')) }}</td>
+            </tr>
+        </table>
+    </div>
+{% endblock %}

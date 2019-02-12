@@ -1,0 +1,77 @@
+// ====================================================================================================== //
+// FORM OPTIONS //
+// ====================================================================================================== //
+.form-options {
+  text-align: center;
+
+  .option-container {
+    .option-icon {
+      margin: 10px;
+      margin-bottom: 25px;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .form-options {
+    .option-container {
+      width: 175px;
+      display: inline-block;
+      width: 150px;
+    }
+
+    .form-options-3 .option-container {
+      width: 230px;
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .form-options {
+    .option-container {
+      width: 230px;
+    }
+
+    .form-options-3 .option-container {
+      width: 300px;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .form-options {
+    .option-container {
+      width: 280px;
+    }
+
+    .form-options-3 .option-container {
+      width: 370px;
+    }
+  }
+}
+
+.dropdown-selector .option-view, .form-options .option-container .option-view {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  background: url('../images/radio-off.png');
+}
+
+.dropdown-selector.active .option-view {
+  background: url('../images/radio-on.png');
+}
+
+.form-options .option-container {
+  &.active .option-view {
+    background: url('../images/radio-on.png');
+  }
+
+  .option-label {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .option-trigger {
+    cursor: pointer;
+  }
+}

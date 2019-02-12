@@ -1,0 +1,27 @@
+{% extends '::admin.html.twig' %}
+
+{% block content %}
+
+    <div class="container">
+
+        <h1>Pagina bewerken <small>{{ content.label }}</small></h1>
+
+        <form method="post" action="{{ path('admin_content_edit', { content: content.id }) }}">
+            {% if form.active %}
+                <div class="checkbox">
+                    <label>{{ form_widget(form.active) }}</label>
+                </div>
+            {% endif %}
+            <div class="form-group">
+                {{ form_widget(form.value) }}
+            </div>
+            <input type="submit" class="btn btn-primary" value="opslaan" />
+            {% set type = 'generic' %}
+            {% if content.city %}
+                {% set type = 'specific' %}
+            {% endif %}
+            <a href="{{ path('admin_content', {'type': type}) }}" class="btn btn-danger">annuleren</a>
+        </form>
+    </div>
+
+{% endblock %}

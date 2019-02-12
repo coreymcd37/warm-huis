@@ -1,0 +1,26 @@
+{% extends '::email.html.twig' %}
+
+{% block base_content %}
+
+    <div class="page-heading" style="background: #{{ house.city.backgroundColorHeader }}; padding: 10px;">
+        {% if house.city.headerLogoImage() %}
+            <img src="{{ absolute_url(vich_uploader_asset(house.city, 'headerLogoImageFile')) }}" height="50" />
+        {% endif %}
+
+        <h1 style="color: #FFF">Mijn Warm Huis</h1>
+    </div>
+
+    <p>
+        Beste,<br />
+        <br />
+        Maak je woning energiezuinig, bespaar voor het leven.<br />
+        Hoe energiezuinig is jouw woning? Hoe kan het beter? Wat kost het en wat brengt het op?  Welke premies zijn er?<br />
+        Bekijk de mogelijkheden van jouw huis, download het stappenplan en bereken je winst.<br />
+        <br />
+        Bekijk <a href="{{ url('app_index') }}">van hieruit</a> verder hoe je beter kan wonen.<br />
+        <br />
+        Veel succes!
+    </p>
+
+    <img src="{{ absolute_url(asset('images/energiecentrale-footer.jpg')) }}" width="600" />
+{% endblock %}
