@@ -1,3 +1,4 @@
+
 # Mijn Warm Huis
 
 Mijn warm huis is a symfony application that allows a user to check the parameters of his house and get recommendations on how to improve it. It is an expansion of the original "Check je huis", which can be found here: https://github.com/StadGent/Check-Je-Huis/
@@ -51,12 +52,13 @@ are welcome!
 will look into making this more generic in the future, but can't guarantee any dates.
 
 ## Example apache virtualhost
-`<VirtualHost *:80>
-    DocumentRoot /web/warmhuis
-    ServerName warmhuis.test
-    SetEnv SYMFONY__ENV prod
-    SetEnv SYMFONY__DEBUG 0
-
+```   
+<VirtualHost *:80>
+    DocumentRoot /web/warmhuis   
+    ServerName warmhuis.test   
+    SetEnv SYMFONY__ENV prod   
+	SetEnv SYMFONY__DEBUG 0
+    
     <Directory /web/warmhuis>
         AllowOverride None
         Options -Indexes +FollowSymLinks
@@ -83,4 +85,4 @@ will look into making this more generic in the future, but can't guarantee any d
         Alias /php7-fcgi /usr/lib/cgi-bin/php7-fcgi
         FastCgiExternalServer /usr/lib/cgi-bin/php7-fcgi -socket /var/run/php/php7.0-fpm.sock -idle-timeout 3600 -pass-header Authorization
     </IfModule>
-</VirtualHost>`
+</VirtualHost>
