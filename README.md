@@ -56,8 +56,8 @@ will look into making this more generic in the future, but can't guarantee any d
 <VirtualHost *:80>
     DocumentRoot /web/warmhuis   
     ServerName warmhuis.test   
-    SetEnv SYMFONY__ENV prod   
-	SetEnv SYMFONY__DEBUG 0
+    SetEnv SYMFONY__ENV prod
+    SetEnv SYMFONY__DEBUG 0
     
     <Directory /web/warmhuis>
         AllowOverride None
