@@ -2,13 +2,14 @@
 
 namespace One\CheckJeHuis\Repository;
 
+use Doctrine\DBAL\LockMode;
 use Doctrine\ORM\EntityRepository;
 use One\CheckJeHuis\Entity\AuditLog;
 use One\CheckJeHuis\Entity\City;
 
 class AuditLogRepository extends EntityRepository
 {
-    public function find($id)
+    public function find($id, $lockMode = LockMode::NONE, $lockVersion = null)
     {
         return parent::find($id);
     }
