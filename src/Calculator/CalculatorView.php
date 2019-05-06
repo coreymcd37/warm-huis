@@ -180,11 +180,12 @@ class CalculatorView
         $from = $this->current->getState();
         $to = $this->upgrade->getState();
 
-        $price = $this->parameters->getPriceGas();
         if ($from->getOil()) {
-            $price = $this->parameters->getPriceOil();
+            $total += ($from->getOil() - $to->getOil()) * $this->parameters->getPriceOil();
+        } else {
+            $total += ($from->getGas() - $to->getGas()) * $this->parameters->getPriceGas();
         }
-        $total += ($from->getGasOrOil() - $to->getGasOrOil()) * $price;
+
         $total += ($from->getElectricity() - $to->getElectricity()) * $this->parameters->getPriceElec();
 
         return $total;
@@ -236,15 +237,13 @@ class CalculatorView
 
         foreach ($this->upgrade->getDiffs() as $diff) {
             if ($diff->getSubject()->getSlug() === $cat) {
-                $price = $this->parameters->getPriceGas();
                 if ($diff->getOil()) {
-                    $price = $this->parameters->getPriceOil();
+                    $total += $diff->getOil() * $this->parameters->getPriceOil();
+                } else {
+                    $total += $diff->getGas() * $this->parameters->getPriceGas();
                 }
-                $total +=
-                    ($diff->getGasOrOil() * $price)
-                    +
-                    ($diff->getElec() * $this->parameters->getPriceElec())
-                ;
+                $total += ($diff->getElec() * $this->parameters->getPriceElec());
+
                 if ($cat === ConfigCategory::CAT_ROOF) {
                     $total += $this->getPriceDiffForCategory(ConfigCategory::CAT_WIND_ROOF);
                 }

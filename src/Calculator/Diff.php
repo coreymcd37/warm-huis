@@ -113,7 +113,7 @@ class Diff
     public function getGasOrOil()
     {
         if ($this->getOil()) {
-            return $this->getOil();
+            return 10 * $this->getOil();
         }
 
         return $this->getGas();

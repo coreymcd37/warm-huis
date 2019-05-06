@@ -86,7 +86,7 @@ class State
         if ($this->isHeatingElectric()) {
             $this->start = $this->electricity - $this->nonHeatingElectricity;
         } else {
-            $this->start = $this->gas;
+            $this->start = $this->getGasOrOil();
         }
 
         $this->co2 = 0;
@@ -354,7 +354,7 @@ class State
             return $this->getSubtotal();
         }
 
-        return $this->getGas();
+        return $this->getGasOrOil();
     }
 
     /**
@@ -370,7 +370,11 @@ class State
         if (($forceElec || $this->forceElectricity) || $this->isHeatingElectric()) {
             $this->electricity -= $amount;
         } else {
-            $this->gas -= $amount;
+            if ($this->oil) {
+                $this->oil -= $amount / 10;
+            } else {
+                $this->gas -= $amount;
+            }
         }
 
         if (!$fromActual) {

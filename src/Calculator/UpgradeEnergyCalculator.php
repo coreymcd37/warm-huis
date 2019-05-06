@@ -33,7 +33,7 @@ class UpgradeEnergyCalculator extends EnergyCalculator
         // when we have gas heating in the current situation
         // the electricity is all nonHeating
         // except if we have previously switched to a heatpump
-        if (!$state->forceElectricity() && !$this->house->hasElectricHeating()) {
+        if (!$state->forceElectricity() && !$this->house->hasElectricHeating() && !$state->getOil()) {
             $state->setNonHeatingElectricity($state->getElectricity());
         }
 
