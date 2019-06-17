@@ -12,11 +12,11 @@ use One\CheckJeHuis\Entity\Content;
 use One\CheckJeHuis\Entity\DefaultEnergy;
 use One\CheckJeHuis\Entity\DefaultRoof;
 use One\CheckJeHuis\Entity\DefaultSurface;
+use One\CheckJeHuis\Entity\Parameter;
 use One\CheckJeHuis\Entity\Renewable;
 use One\CheckJeHuis\Entity\Subsidy;
 use One\CheckJeHuis\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use One\CheckJeHuis\Entity\Parameter;
 
 class EntityListener
 {

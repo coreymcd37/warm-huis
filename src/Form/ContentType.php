@@ -2,24 +2,18 @@
 
 namespace One\CheckJeHuis\Form;
 
-use One\CheckJeHuis\Service\HouseService;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Trsteel\CkeditorBundle\Form\Type\CkeditorType;
 
 class ContentType extends AbstractType
 {
-    protected $allowDeactivation;
-
-    public function __construct($allowDeactivation = true)
-    {
-        $this->allowDeactivation = $allowDeactivation;
-    }
-
     /**
      * @return string The name of this type
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'content';
     }
@@ -28,12 +22,12 @@ class ContentType extends AbstractType
     {
         parent::buildForm($builder, $options);
 
-        if ($this->allowDeactivation) {
-            $builder->add('active', 'checkbox', array('label' => 'Actief', 'required' => false));
+        if (array_key_exists('allow_deactivation', $options) && $options['allow_deactivation'] === true) {
+            $builder->add('active', CheckboxType::class, array('label' => 'Actief', 'required' => false));
         }
 
         $builder
-            ->add('value', 'ckeditor', array(
+            ->add('value', CkeditorType::class, array(
                 'toolbar' => array('basicstyles', 'links', 'paragraph', 'styles', 'insert'),
                 'toolbar_groups' => array('insert'=> array('Image')),
                 'height' => 400,
@@ -42,11 +36,12 @@ class ContentType extends AbstractType
         ;
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'One\CheckJeHuis\Entity\Content',
             'csrf_protection' => false,
+            'allow_deactivation' => false,
         ));
     }
 }

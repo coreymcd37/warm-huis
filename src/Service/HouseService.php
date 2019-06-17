@@ -2,16 +2,16 @@
 
 namespace One\CheckJeHuis\Service;
 
+use Doctrine\ORM\EntityManager;
+use Knp\Snappy\GeneratorInterface;
 use One\CheckJeHuis\Entity\City;
 use One\CheckJeHuis\Entity\Config;
 use One\CheckJeHuis\Entity\ConfigCategory;
 use One\CheckJeHuis\Entity\DefaultEnergy;
-use One\CheckJeHuis\Entity\House;
-use One\CheckJeHuis\Entity\DefaultSurface;
 use One\CheckJeHuis\Entity\DefaultRoof;
+use One\CheckJeHuis\Entity\DefaultSurface;
+use One\CheckJeHuis\Entity\House;
 use One\CheckJeHuis\Entity\Parameter;
-use Doctrine\ORM\EntityManager;
-use Knp\Snappy\GeneratorInterface;
 use One\CheckJeHuis\Repository\ConfigRepository;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\DependencyInjection\ContainerInterface;

@@ -3,8 +3,8 @@
 namespace One\CheckJeHuis\Service;
 
 use One\CheckJeHuis\Entity\DefaultEnergy;
-use One\CheckJeHuis\Entity\DefaultSurface;
 use One\CheckJeHuis\Entity\DefaultRoof;
+use One\CheckJeHuis\Entity\DefaultSurface;
 
 class DefaultsService extends AbstractService
 {

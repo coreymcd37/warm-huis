@@ -2,18 +2,12 @@
 
 namespace One\CheckJeHuis\Repository;
 
-use Doctrine\DBAL\LockMode;
 use Doctrine\ORM\EntityRepository;
 use One\CheckJeHuis\Entity\City;
 use One\CheckJeHuis\Entity\House;
 
 class HouseRepository extends EntityRepository
 {
-    public function find($id, $lockMode = LockMode::NONE, $lockVersion = null)
-    {
-        return parent::find($id, $lockMode, $lockVersion);
-    }
-
     public function getHousesFromCity(City $city)
     {
         $qb = $this->getEntityManager()->createQueryBuilder();

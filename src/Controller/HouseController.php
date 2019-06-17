@@ -1094,7 +1094,7 @@ class HouseController extends AbstractController
             return $this->noHouseRedirect();
         }
 
-        $form = $this->createForm(new HouseEmailType(), $house);
+        $form = $this->createForm(HouseEmailType::class, $house);
 
         if ($request->isMethod('post')) {
             $form->handleRequest($request);
@@ -1190,7 +1190,7 @@ class HouseController extends AbstractController
 
         $download = false;
         if ($request->getMethod() == 'POST') {
-            $form = $this->createForm(new MailPlanType(), $house);
+            $form = $this->createForm(MailPlanType::class, $house);
             $form->handleRequest($request);
 
             if ($form->isValid()) {

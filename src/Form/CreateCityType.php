@@ -112,18 +112,18 @@ class CreateCityType extends AbstractType
                 'label' => "Checkbox 'Ik blijf graag op de hoogte'",
                 'expanded' => true,
                 'choices'  => [
-                    City::STAY_UP_TO_DATE_NOT_CHECKED => 'Toon checkbox, niet aangevinkt',
-                    City::STAY_UP_TO_DATE_CHECKED => 'Toon checkbox, aangevinkt',
-                    City::STAY_UP_TO_DATE_HIDE => 'Checkbox niet tonen',
+                    'Toon checkbox, niet aangevinkt' => City::STAY_UP_TO_DATE_NOT_CHECKED,
+                    'Toon checkbox, aangevinkt' => City::STAY_UP_TO_DATE_CHECKED,
+                    'Checkbox niet tonen' => City::STAY_UP_TO_DATE_HIDE,
                 ],
             ])
             ->add('defaultBuildingType', ChoiceType::class, [
                 'label' => 'Standaard type gebouw',
-                'choices' => House::getBuildingTypes(),
+                'choices' => array_flip(House::getBuildingTypes()),
             ])
             ->add('defaultBuildYear', ChoiceType::class, [
                 'label' => 'Standaard bouwjaar',
-                'choices' => House::getYears(),
+                'choices' => array_flip(House::getYears()),
             ])
 
         ;

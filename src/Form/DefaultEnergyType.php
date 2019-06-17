@@ -3,15 +3,16 @@
 namespace One\CheckJeHuis\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DefaultEnergyType extends AbstractType
 {
     /**
      * @return string The name of this type
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'config_default_energy';
     }
@@ -21,14 +22,14 @@ class DefaultEnergyType extends AbstractType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('gas', 'text', array('label' => 'Gas'))
-            ->add('electricity', 'text', array('label' => 'Elektriciteit'))
-            ->add('electricHeating', 'text', array('label' => 'Electrisch verwarmen'))
-            ->add('oil', 'text', array('label' => 'Stookolie'))
+            ->add('gas', TextType::class, array('label' => 'Gas'))
+            ->add('electricity', TextType::class, array('label' => 'Elektriciteit'))
+            ->add('electricHeating', TextType::class, array('label' => 'Electrisch verwarmen'))
+            ->add('oil', TextType::class, array('label' => 'Stookolie'))
         ;
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'One\CheckJeHuis\Entity\DefaultEnergy',

@@ -3,10 +3,10 @@
 namespace One\CheckJeHuis\Controller;
 
 use One\CheckJeHuis\Entity\ConfigCategory;
+use One\CheckJeHuis\Entity\House;
 use One\CheckJeHuis\Entity\Parameter;
 use One\CheckJeHuis\Service\HouseService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use One\CheckJeHuis\Entity\House;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 abstract class AbstractController extends Controller
@@ -19,7 +19,7 @@ abstract class AbstractController extends Controller
         $house = $houseService->loadHouse();
 
         $save = false;
-        $cookieAddress = $this->get('request')->cookies->get('user-address');
+        $cookieAddress = $this->get('request_stack')->getCurrentRequest()->cookies->get('user-address');
 
         if (!$house && $create && $cityId) {
             $paramService = $this->get('one.check_je_huis.service.parameter');
@@ -79,7 +79,7 @@ abstract class AbstractController extends Controller
     protected function getAsset($path)
     {
         $path = '/' . $path;
-        return $this->container->get('templating.helper.assets')->getUrl($path);
+        return $this->container->get('assets.packages')->getUrl($path);
     }
 
     protected function getContentBySlug(string $slug, $city = null)

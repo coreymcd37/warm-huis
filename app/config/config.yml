@@ -31,9 +31,8 @@ twig:
     strict_variables: false
 
     # override default forms to comply with bootstrap formatting
-    form:
-        resources:
-            - "::bootstrap_forms.html.twig"
+    form_themes:
+        - "::bootstrap_forms.html.twig"
 
 doctrine:
     dbal:

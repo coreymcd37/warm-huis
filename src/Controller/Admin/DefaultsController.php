@@ -43,7 +43,7 @@ class DefaultsController extends Controller
 
         $surface = $service->getSurfaceById($id);
 
-        $form = $this->createForm(new DefaultSurfacesType(), $surface);
+        $form = $this->createForm(DefaultSurfacesType::class, $surface);
         $success = true;
 
         if ($request->isMethod('POST')) {
@@ -73,7 +73,7 @@ class DefaultsController extends Controller
 
         $surface = $service->getRoofById($id);
 
-        $form = $this->createForm(new DefaultRoofSurfaceType(), $surface);
+        $form = $this->createForm(DefaultRoofSurfaceType::class, $surface);
         $success = true;
 
         if ($request->isMethod('POST')) {

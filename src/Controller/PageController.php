@@ -76,7 +76,7 @@ class PageController extends AbstractController
             return $this->noHouseRedirect();
         }
 
-        $form = $this->createForm(new MailPlanType(), $house);
+        $form = $this->createForm(MailPlanType::class, $house);
         $city = $house->getCity();
 
         return $this->render(':Page:plan.html.twig', array(

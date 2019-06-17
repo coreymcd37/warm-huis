@@ -4,15 +4,16 @@ namespace One\CheckJeHuis\Form;
 
 use One\CheckJeHuis\Service\HouseService;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ParameterType extends AbstractType
 {
     /**
      * @return string The name of this type
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'parameter';
     }
@@ -22,11 +23,11 @@ class ParameterType extends AbstractType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('value', 'text')
+            ->add('value', TextType::class)
         ;
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'One\CheckJeHuis\Entity\Parameter',

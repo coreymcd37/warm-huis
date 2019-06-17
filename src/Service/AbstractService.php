@@ -2,8 +2,8 @@
 
 namespace One\CheckJeHuis\Service;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 abstract class AbstractService
 {

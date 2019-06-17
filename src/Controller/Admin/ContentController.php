@@ -43,7 +43,7 @@ class ContentController extends AbstractController
         if (!$content->canEdit($this->getUser())) {
             return $this->redirect($this->generateUrl('admin_content', ['type' => $type]));
         }
-        $form = $this->createForm(new ContentType($content->canDeactivate()), $content);
+        $form = $this->createForm(ContentType::class, $content, ['allow_deactivation' => $content->canDeactivate()]);
 
         if ($request->isMethod('post')) {
             $form->handleRequest($request);

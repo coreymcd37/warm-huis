@@ -5,19 +5,21 @@ namespace One\CheckJeHuis\Form;
 use One\CheckJeHuis\Entity\City;
 use One\CheckJeHuis\Entity\House;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class MailPlanType extends AbstractType
 {
     /**
      * @return string The name of this type
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'mail_plan';
     }
@@ -31,7 +33,7 @@ class MailPlanType extends AbstractType
             $form = $event->getForm();
             if ($house instanceof House) {
                 $city = $house->getCity();
-                $form->add('email', 'email', array(
+                $form->add('email', EmailType::class, array(
                     'label' => 'Of mail mijn persoonlijk stappenplan naar',
                     'required' => true,
                 ));
@@ -42,7 +44,7 @@ class MailPlanType extends AbstractType
                 ]);
 
                 if ($city->getStayUpToDate() != City::STAY_UP_TO_DATE_HIDE) {
-                    $form->add('newsletter', 'checkbox', array(
+                    $form->add('newsletter', CheckboxType::class, array(
                         'data' => $city->getStayUpToDate() == City::STAY_UP_TO_DATE_CHECKED ? true : false,
                         'required' => false,
                         'label' => 'Ik blijf graag op de hoogte van nieuwe initiatieven i.v.m. energiezuinig renoveren met premies, bouwadvies en renovatiebegeleiding zowel algemeen als afgestemd op mijn woonsituatie. Neem daarom mijn e-mailadres en/of adres samen met de gegevens over mijn woning op in de databank.',
@@ -65,7 +67,7 @@ class MailPlanType extends AbstractType
         });
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'One\CheckJeHuis\Entity\House',

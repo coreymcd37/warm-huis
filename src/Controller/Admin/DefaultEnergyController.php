@@ -42,7 +42,7 @@ class DefaultEnergyController extends Controller
     {
         $energy = $this->defaultEnergyRepository->getEnergyById($id);
 
-        $form = $this->createForm(new DefaultEnergyType(), $energy);
+        $form = $this->createForm(DefaultEnergyType::class, $energy);
         $success = true;
 
         if ($request->isMethod('POST')) {

@@ -2,10 +2,10 @@
 
 namespace One\CheckJeHuis\Controller\Admin;
 
+use One\CheckJeHuis\Service\ParameterService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use One\CheckJeHuis\Service\ParameterService;
 
 class ParameterController extends Controller
 {

@@ -2,6 +2,7 @@
 
 namespace One\CheckJeHuis\Form;
 
+use One\CheckJeHuis\Command\EditCityCommand;
 use One\CheckJeHuis\Entity\City;
 use One\CheckJeHuis\Entity\House;
 use Symfony\Component\Form\AbstractType;
@@ -12,8 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use One\CheckJeHuis\Command\EditCityCommand;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Email;
 
 class EditCityType extends AbstractType
@@ -129,23 +129,23 @@ class EditCityType extends AbstractType
                 'label' => "Checkbox 'Ik blijf graag op de hoogte'",
                 'expanded' => true,
                 'choices'  => [
-                    City::STAY_UP_TO_DATE_NOT_CHECKED => 'Toon checkbox, niet aangevinkt',
-                    City::STAY_UP_TO_DATE_CHECKED => 'Toon checkbox, aangevinkt',
-                    City::STAY_UP_TO_DATE_HIDE => 'Checkbox niet tonen',
+                    'Toon checkbox, niet aangevinkt' => City::STAY_UP_TO_DATE_NOT_CHECKED,
+                    'Toon checkbox, aangevinkt' => City::STAY_UP_TO_DATE_CHECKED,
+                    'Checkbox niet tonen' => City::STAY_UP_TO_DATE_HIDE,
                 ],
             ])
             ->add('defaultBuildingType', ChoiceType::class, [
                 'label' => 'Standaard type gebouw',
-                'choices' => House::getBuildingTypes(),
+                'choices' => array_flip(House::getBuildingTypes()),
             ])
             ->add('defaultBuildYear', ChoiceType::class, [
                 'label' => 'Standaard bouwjaar',
-                'choices' => House::getYears(),
+                'choices' => array_flip(House::getYears()),
             ])
         ;
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => EditCityCommand::class,

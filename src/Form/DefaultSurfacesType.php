@@ -4,15 +4,16 @@ namespace One\CheckJeHuis\Form;
 
 use One\CheckJeHuis\Service\HouseService;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DefaultSurfacesType extends AbstractType
 {
     /**
      * @return string The name of this type
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'config_default_surfaces';
     }
@@ -22,14 +23,14 @@ class DefaultSurfacesType extends AbstractType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('livingArea', 'text', array('label' => 'Bewoonbaar'))
-            ->add('floor', 'text', array('label' => 'Grond'))
-            ->add('facade', 'text', array('label' => 'Gevel'))
-            ->add('window', 'text', array('label' => 'Ramen'))
+            ->add('livingArea', TextType::class, array('label' => 'Bewoonbaar'))
+            ->add('floor', TextType::class, array('label' => 'Grond'))
+            ->add('facade', TextType::class, array('label' => 'Gevel'))
+            ->add('window', TextType::class, array('label' => 'Ramen'))
         ;
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'One\CheckJeHuis\Entity\DefaultSurface',

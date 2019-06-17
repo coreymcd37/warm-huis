@@ -68,10 +68,10 @@
         </service>
 
         <service id="session.handler.pdo" class="Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler">
-            <argument key="dsn">mysql:host=%database_host%;dbname=%database_name%</argument>
+            <argument>mysql:host=%database_host%;dbname=%database_name%</argument>
             <argument>%pdo_session.db_options%</argument>
         </service>
-        
+
         <service id="one.check_je_huis.security.city_voter" class="One\CheckJeHuis\Security\CityVoter" public="false">
             <tag name="security.voter" />
         </service>

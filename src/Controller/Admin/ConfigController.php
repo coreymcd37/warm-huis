@@ -3,9 +3,9 @@
 namespace One\CheckJeHuis\Controller\Admin;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityNotFoundException;
 use One\CheckJeHuis\Entity\ConfigTransformation;
 use One\CheckJeHuis\Form\ConfigTransformationType;
-use Doctrine\ORM\EntityNotFoundException;
 use One\CheckJeHuis\Repository\ConfigCategoryRepository;
 use One\CheckJeHuis\Repository\ConfigRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -82,7 +82,7 @@ class ConfigController extends Controller
                 ->setUnit('%');
         }
 
-        $form = $this->createForm(new ConfigTransformationType(), $transformation);
+        $form = $this->createForm(ConfigTransformationType::class, $transformation);
         $success = true;
 
         if ($request->isMethod('POST')) {
