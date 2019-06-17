@@ -2054,20 +2054,6 @@ CREATE TABLE `houses` (
   CONSTRAINT `FK_95D7F5CBBE6B401D` FOREIGN KEY (`defaultRoofIfFlat_id`) REFERENCES `default_roofs` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-
-# Dump of table migration_versions
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `migration_versions`;
-
-CREATE TABLE `migration_versions` (
-  `version` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`version`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-
-
 # Dump of table parameters
 # ------------------------------------------------------------
 

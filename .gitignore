@@ -1,10 +1,10 @@
 /web/bundles/
 /app/bootstrap.php.cache
-/app/cache/*
+/var/cache/*
+!var/cache/.gitkeep
 /app/config/parameters.yml
-/app/logs/*
-!app/cache/.gitkeep
-!app/logs/.gitkeep
+/var/logs/*
+!var/logs/.gitkeep
 /vendor/
 /bin/
 /composer.phar
