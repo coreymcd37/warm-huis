@@ -9,12 +9,13 @@ Minimum PHP 7.0.0 is required and composer to perform the installation.
 ## Installation
 
 The following steps can be followed to install the application
-1. Clone this repository and go to the directory of the cloned repo
-2. `composer install`
-3. At the end of `composer install` fill in the correct parameters for the application such as database connection details.
-4. `app/console doctrine:migrations:migrate`
-5. `app/console cache:clear && app/console cache:warmup`
-6. Dump the assets
+1. Clone this repository and go to the directory of the cloned repo 
+2. Copy `app/config/parameters.yml.dist` to `app/config/parameters.yml` and modify the file 
+3. `composer install`
+4. At the end of `composer install` fill in the correct parameters for the application such as database connection details.
+5. `app/console doctrine:migrations:migrate`
+6. `app/console cache:clear && app/console cache:warmup`
+7. Dump the assets
   * in production environments dump the assets into public folder:
 `app/console assetic:dump`
   * in dev environment symlink the assets: `app/console assets:install --symlink`
@@ -54,12 +55,12 @@ will look into making this more generic in the future, but can't guarantee any d
 ## Example apache virtualhost
 ```   
 <VirtualHost *:80>
-    DocumentRoot /web/warmhuis   
+    DocumentRoot /web/warmhuis/web   
     ServerName warmhuis.test   
     SetEnv SYMFONY__ENV prod
     SetEnv SYMFONY__DEBUG 0
     
-    <Directory /web/warmhuis>
+    <Directory /web/warmhuis/web>
         AllowOverride None
         Options -Indexes +FollowSymLinks
         Require all granted
