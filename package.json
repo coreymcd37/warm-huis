@@ -16,7 +16,7 @@
     "gulp-concat": "^2.6.1",
     "gulp-help": "latest",
     "gulp-sass": "latest",
-    "gulp-sass-glob": "latest",
+    "gulp-sass-glob": "^1.1.0",
     "gulp-sequence": "^1.0.0",
     "gulp-sourcemaps": "^2.6.5",
     "terminal-notifier": "^0.1.2"
